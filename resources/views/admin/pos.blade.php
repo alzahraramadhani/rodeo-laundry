@@ -298,35 +298,28 @@
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
                                 </svg>
-                                <span>Simpan & Cetak Struk</span>
+                                <span>Simpan Struk</span>
                             </button>
 
                             <button type="button"
-                                    @click="alert('Draft pesanan berhasil disimpan sementara ke memori kasir!')"
-                                    class="w-full py-3 px-4 rounded-2xl bg-[#EEF0FA] hover:bg-[#E2E6F2] text-[#1E1B4B] font-bold text-xs transition flex items-center justify-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    @click="sendWhatsAppReceipt()"
+                                    :disabled="cart.length === 0 || !selectedCustomer"
+                                    :class="cart.length === 0 || !selectedCustomer ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#E2E6F2]'"
+                                    class="w-full py-3 px-4 rounded-2xl bg-[#EEF0FA] text-[#1E1B4B] font-bold text-xs transition flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
                                 </svg>
-                                <span>Simpan Jadi Draft / SPK Cuci</span>
+                                <span>Kirim Struk ke WA Cust</span>
                             </button>
                         </div>
                     </form>
 
                     <!-- Hardware Status Footer -->
-                    <div class="pt-3 border-t border-[#F0F2F8] flex items-center justify-center gap-4 text-[11px] font-semibold text-[#64748B]">
-                        <div class="flex items-center gap-1 text-emerald-600">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <span>Printer Kasir Siap</span>
-                        </div>
-                        <span>•</span>
-                        <div class="flex items-center gap-1 text-emerald-600">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                            </svg>
-                            <span>WhatsApp Otomatis</span>
-                        </div>
+                    <div class="pt-3 border-t border-[#F0F2F8] flex items-center justify-center text-xs font-semibold text-emerald-600 gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                        </svg>
+                        <span>Cetak Struk</span>
                     </div>
 
                 </div>
@@ -414,6 +407,37 @@
 
                 formatRupiah(number) {
                     return Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                },
+
+                sendWhatsAppReceipt() {
+                    if (!this.selectedCustomer) {
+                        alert('Silakan pilih pelanggan terlebih dahulu!');
+                        return;
+                    }
+                    if (this.cart.length === 0) {
+                        alert('Keranjang belanja masih kosong!');
+                        return;
+                    }
+                    const rawPhone = this.selectedCustomer.phone ? this.selectedCustomer.phone.replace(/[^0-9]/g, '') : '';
+                    if (!rawPhone) {
+                        alert('Pelanggan ini belum memiliki nomor telepon / WhatsApp!');
+                        return;
+                    }
+                    const intlPhone = rawPhone.startsWith('0') ? '62' + rawPhone.substring(1) : (rawPhone.startsWith('62') ? rawPhone : '62' + rawPhone);
+                    
+                    let text = `*NOTA TRANSAKSI - RODEO LAUNDRY MALANG*\n`;
+                    text += `Pelanggan: ${this.selectedCustomer.name}\n`;
+                    text += `Metode Pembayaran: ${this.paymentMethod.toUpperCase()}\n`;
+                    text += `--------------------------------\n`;
+                    this.cart.forEach(it => {
+                        text += `• ${it.name} (${it.qty} ${it.unit}) : Rp ${this.formatRupiah(it.qty * it.price)}\n`;
+                    });
+                    text += `--------------------------------\n`;
+                    text += `*TOTAL HARGA: Rp ${this.formatRupiah(this.totalCart)}*\n\n`;
+                    text += `Terima kasih telah mempercayakan pakaian Anda kepada Rodeo Laundry Malang! Cucian Anda segera kami proses dengan bersih dan wangi.`;
+
+                    const url = `https://wa.me/${intlPhone}?text=${encodeURIComponent(text)}`;
+                    window.open(url, '_blank');
                 },
 
                 submitOrder() {
