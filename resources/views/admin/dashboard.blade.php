@@ -75,10 +75,10 @@
             </div>
         </div>
 
-        <!-- Card 3: Pelanggan Aktif -->
+        <!-- Card 3: Order Dalam Proses -->
         <div class="bg-white rounded-3xl p-6 border border-[#E9ECF4] shadow-sm flex flex-col justify-between hover:shadow-md transition">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Pelanggan Aktif</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Order Dalam Proses</span>
                 <div class="w-10 h-10 rounded-2xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
@@ -87,34 +87,33 @@
             </div>
             <div>
                 <div class="text-4xl font-extrabold text-[#1E1B4B] tracking-tight mb-3">
-                    {{ $activeCustomers }}
+                    {{ $inProcessOrders ?? $activeCustomers }}
                 </div>
                 <div>
                     <span class="inline-block px-3 py-1 rounded-full bg-[#F1F3FA] text-[#1E1B4B] text-xs font-bold">
-                        +12 Baru
+                        {{ $inProcessOrders ?? $activeCustomers }} Aktif
                     </span>
                 </div>
             </div>
         </div>
 
-        <!-- Card 4: Antrian Mesin Aktif -->
+        <!-- Card 4: Order Selesai -->
         <div class="bg-white rounded-3xl p-6 border border-[#E9ECF4] shadow-sm flex flex-col justify-between hover:shadow-md transition">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Antrian Mesin Aktif</span>
-                <div class="w-10 h-10 rounded-2xl bg-[#FEF3C7] text-[#D97706] flex items-center justify-center">
+                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Order Selesai</span>
+                <div class="w-10 h-10 rounded-2xl bg-[#ECFDF5] text-[#10B981] flex items-center justify-center">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
             </div>
             <div>
                 <div class="text-4xl font-extrabold text-[#1E1B4B] tracking-tight mb-3">
-                    {{ $activeMachineQueue }}
+                    {{ $completedOrders ?? $activeMachineQueue }}
                 </div>
                 <div>
-                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#FEE2E2] text-[#B91C1C] text-xs font-bold">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
-                        {{ $urgentCount }} Urgent
+                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#D1FAE5] text-[#065F46] text-xs font-bold">
+                        {{ $completedOrders ?? $activeMachineQueue }} Selesai
                     </span>
                 </div>
             </div>

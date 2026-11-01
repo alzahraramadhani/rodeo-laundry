@@ -29,9 +29,13 @@ class AdminDashboardController extends Controller
             $todayRevenue = Payment::where('status', 'completed')->sum('amount');
         }
 
-        $activeCustomers = Customer::count();
+        // Metrik baru: Order Dalam Proses & Order Selesai
+        $inProcessOrders = Order::whereIn('status', ['pending', 'processing'])->count();
+        $completedOrders = Order::whereIn('status', ['ready', 'completed'])->count();
 
-        $activeMachineQueue = Order::whereIn('status', ['pending', 'processing'])->count();
+        // Kompatibilitas variabel lama
+        $activeCustomers = $inProcessOrders;
+        $activeMachineQueue = $completedOrders;
         $urgentCount = Order::where('status', 'processing')->count();
 
         // Query pesanan terbaru dengan filter status jika ada
@@ -64,6 +68,8 @@ class AdminDashboardController extends Controller
             'todayRevenue',
             'selectedDate',
             'isDateFiltered',
+            'inProcessOrders',
+            'completedOrders',
             'activeCustomers',
             'activeMachineQueue',
             'urgentCount',
