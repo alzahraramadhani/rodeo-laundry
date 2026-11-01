@@ -117,6 +117,9 @@
                 if (!res.ok) { 
                     this.error = 'Gagal membuat pesanan, silakan coba lagi.'; 
                     this.submitting = false; 
+                    return;
+                }
+
                 ['cart_kiloan', 'cart_service_qty', 'cart_notes', 'cart_service_notes', 'cart_courier_notes', 'cart_pickup', 'cart_delivery', 'cart_address'].forEach(k => {
                     localStorage.removeItem(k);
                     localStorage.removeItem('_x_' + k);
@@ -155,17 +158,20 @@
             return this.services.filter(s => (this.serviceQty[s.id] || 0) > 0);
         },
         get totalBayar() {
-            let t = this.kiloan * this.hargaKiloan;
-            this.services.forEach(s => t += s.price * (this.serviceQty[s.id] || 0));
+            let t = (Number(this.kiloan) || 0) * (Number(this.hargaKiloan) || 0);
+            (this.services || []).forEach(s => t += (Number(s.price) || 0) * (Number(this.serviceQty[s.id]) || 0));
             return t;
         },
         get totalItems() {
-            let count = this.kiloan > 0 ? 1 : 0;
-            this.services.forEach(s => { count += (this.serviceQty[s.id] || 0); });
+            let count = (Number(this.kiloan) || 0) > 0 ? 1 : 0;
+            (this.services || []).forEach(s => { count += (Number(this.serviceQty[s.id]) || 0); });
             return count;
         },
-        get hasAnySelected() { return this.kiloan > 0 || this.selectedServices.length > 0; },
-        formatRp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+        get hasAnySelected() { return (Number(this.kiloan) || 0) > 0 || this.selectedServices.length > 0; },
+        formatRp(n) { 
+            const val = Number(n) || 0;
+            return 'Rp ' + val.toLocaleString('id-ID'); 
+        }
     }">
 
     <!-- ================= HEADER ================= -->

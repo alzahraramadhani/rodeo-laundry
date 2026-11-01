@@ -36,6 +36,13 @@ class OrderController extends Controller
             $payment = $order->payment;
             $paymentStatus = $payment->status ?? 'pending';
 
+            // Sinkronisasi otomatis: Jika pembayaran sudah lunas tapi status pesanan masih pending,
+            // otomatis perbarui ke 'processing' (Sedang Dicuci) agar stepper langsung maju.
+            if ($order->status === 'pending' && $paymentStatus === 'completed') {
+                $order->update(['status' => 'processing']);
+                $order->status = 'processing';
+            }
+
             $paymentStatusLabels = [
                 'pending'   => 'Menunggu Pembayaran',
                 'completed' => 'Lunas',
