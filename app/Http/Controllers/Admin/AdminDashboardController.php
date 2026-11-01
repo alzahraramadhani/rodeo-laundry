@@ -42,13 +42,18 @@ class AdminDashboardController extends Controller
         }
 
         if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('id', 'like', "%{$search}%")
-                  ->orWhereHas('customer', function ($cq) use ($search) {
-                      $cq->where('name', 'like', "%{$search}%")
-                         ->orWhere('phone', 'like', "%{$search}%");
-                  });
+            $search = trim($request->search);
+            $cleanNumeric = preg_replace('/[^0-9]/', '', $search);
+
+            $query->where(function ($q) use ($search, $cleanNumeric) {
+                $q->where('id', 'like', "%{$search}%");
+                if (!empty($cleanNumeric)) {
+                    $q->orWhere('id', (int)$cleanNumeric);
+                }
+                $q->orWhereHas('customer', function ($cq) use ($search) {
+                    $cq->where('name', 'like', "%{$search}%")
+                       ->orWhere('phone', 'like', "%{$search}%");
+                });
             });
         }
 

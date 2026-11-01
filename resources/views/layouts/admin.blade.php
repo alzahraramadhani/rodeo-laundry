@@ -186,16 +186,18 @@
                     </button>
 
                     <!-- Global Search -->
-                    <div class="relative w-full max-w-md hidden sm:block">
+                    <form method="GET" action="{{ route('admin.dashboard') }}" class="relative w-full max-w-md hidden sm:block">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                         </div>
                         <input type="text"
+                               name="search"
+                               value="{{ request('search') }}"
                                placeholder="Cari nota, nomor rak, pelanggan..."
                                class="w-full pl-10 pr-4 py-2 bg-[#F8F9FD] border border-[#E9ECF4] rounded-full text-xs md:text-sm text-[#1E1B4B] placeholder-[#94A3B8] focus:outline-none focus:border-[#1E1B4B] focus:ring-1 focus:ring-[#1E1B4B] transition">
-                    </div>
+                    </form>
                 </div>
 
                 <!-- Right Controls -->
