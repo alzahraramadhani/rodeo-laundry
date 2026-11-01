@@ -201,13 +201,35 @@
                 <!-- Right Controls -->
                 <div class="flex items-center gap-2 md:gap-3">
                     
-                    <!-- Date Pill -->
-                    <div class="flex items-center gap-2 px-3.5 py-2 bg-white border border-[#E9ECF4] rounded-full text-xs font-semibold text-[#1E1B4B] shadow-sm">
-                        <svg class="w-4 h-4 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                        <span>Hari Ini: {{ \Carbon\Carbon::now()->isoFormat('D MMM Y') }}</span>
-                    </div>
+                    <!-- Date Pill & Picker -->
+                    <form method="GET" action="{{ route('admin.dashboard') }}" class="relative flex items-center">
+                        @if(request('search'))
+                            <input type="hidden" name="search" value="{{ request('search') }}">
+                        @endif
+                        @if(request('status'))
+                            <input type="hidden" name="status" value="{{ request('status') }}">
+                        @endif
+                        <label class="relative flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-[#F8F9FD] border border-[#E9ECF4] rounded-full text-xs font-semibold text-[#1E1B4B] shadow-sm cursor-pointer transition" title="Klik untuk pilih tanggal & filter pendapatan">
+                            <svg class="w-4 h-4 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <span>
+                                @if(request('date'))
+                                    {{ \Carbon\Carbon::parse(request('date'))->isoFormat('D MMM Y') }}
+                                @else
+                                    Hari Ini: {{ \Carbon\Carbon::now()->isoFormat('D MMM Y') }}
+                                @endif
+                            </span>
+                            <svg class="w-3.5 h-3.5 text-[#94A3B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            <input type="date"
+                                   name="date"
+                                   value="{{ request('date', \Carbon\Carbon::now()->format('Y-m-d')) }}"
+                                   onchange="this.form.submit()"
+                                   class="absolute inset-0 opacity-0 w-full h-full cursor-pointer">
+                        </label>
+                    </form>
 
                     <!-- Notification Bell -->
                     <button class="relative w-10 h-10 rounded-full bg-white border border-[#E9ECF4] flex items-center justify-center text-[#1E1B4B] hover:bg-[#F8F9FD] transition shadow-sm">

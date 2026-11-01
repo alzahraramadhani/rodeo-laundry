@@ -16,12 +16,16 @@ class AdminDashboardController extends Controller
     {
         $totalOrders = Order::count();
 
-        // Total pendapatan hari ini (atau total keseluruhan pembayaran lunas jika seeder belum ada hari ini)
+        // Tanggal yang dipilih (default hari ini)
+        $selectedDate = $request->query('date', Carbon::today()->toDateString());
+        $isDateFiltered = $request->filled('date');
+
+        // Total pendapatan pada tanggal terpilih
         $todayRevenue = Payment::where('status', 'completed')
-            ->whereDate('created_at', Carbon::today())
+            ->whereDate('created_at', $selectedDate)
             ->sum('amount');
 
-        if ($todayRevenue == 0) {
+        if (!$isDateFiltered && $todayRevenue == 0) {
             $todayRevenue = Payment::where('status', 'completed')->sum('amount');
         }
 
@@ -53,6 +57,8 @@ class AdminDashboardController extends Controller
         return view('admin.dashboard', compact(
             'totalOrders',
             'todayRevenue',
+            'selectedDate',
+            'isDateFiltered',
             'activeCustomers',
             'activeMachineQueue',
             'urgentCount',

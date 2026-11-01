@@ -52,7 +52,9 @@
         <div class="bg-[#1E1B4B] rounded-3xl p-6 shadow-xl flex flex-col justify-between relative overflow-hidden group">
             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 pointer-events-none"></div>
             <div class="flex items-center justify-between mb-4 relative z-10">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">Pendapatan Hari Ini</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+                    {{ isset($isDateFiltered) && $isDateFiltered ? 'Pendapatan ' . \Carbon\Carbon::parse($selectedDate)->translatedFormat('d M Y') : 'Pendapatan Hari Ini' }}
+                </span>
                 <div class="w-10 h-10 rounded-2xl bg-white/10 text-[#BFF108] flex items-center justify-center">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
