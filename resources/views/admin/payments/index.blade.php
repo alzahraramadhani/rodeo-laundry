@@ -128,6 +128,16 @@
                                 </td>
                                 <td class="py-4 px-6 text-center">
                                     <div class="flex items-center justify-center gap-2">
+                                        <!-- Cetak Struk Button -->
+                                        <button type="button"
+                                                @click="window.open('/admin/orders/' + {{ $item->order_id }} + '/receipt', '_blank', 'width=450,height=650')"
+                                                class="w-8 h-8 rounded-full bg-[#E0E7FF] hover:bg-[#4338CA] text-[#4338CA] hover:text-white flex items-center justify-center transition shadow-sm"
+                                                title="Cetak Struk">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                                            </svg>
+                                        </button>
+
                                         <!-- Edit Button -->
                                         <button type="button"
                                                 @click="openEditModal({{ json_encode($item) }})"

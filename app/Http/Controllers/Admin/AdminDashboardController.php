@@ -87,4 +87,10 @@ class AdminDashboardController extends Controller
 
         return back()->with('success', 'Status pesanan #RD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT) . ' diperbarui.');
     }
+
+    public function printReceipt(Order $order)
+    {
+        $order->load(['customer', 'items.service', 'payment', 'delivery']);
+        return view('admin.orders.receipt', compact('order'));
+    }
 }
