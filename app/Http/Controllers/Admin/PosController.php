@@ -75,12 +75,26 @@ class PosController extends Controller
                 default => 'cash',
             };
 
+            // Status pembayaran: jika tunai dan uang diterima kurang dari total, status adalah pending (belum lunas)
+            $cashReceived = (float)($request->cash_received ?? 0);
+            $isPaid = false;
+
+            if ($method === 'cash') {
+                $isPaid = ($cashReceived >= $totalPrice);
+            } elseif (in_array($method, ['e-wallet', 'transfer', 'credit_card'])) {
+                $isPaid = true;
+            } else {
+                $isPaid = false;
+            }
+
+            $paymentStatus = $isPaid ? 'completed' : 'pending';
+
             // Create Payment
             Payment::create([
                 'order_id' => $order->id,
                 'amount'   => $totalPrice,
                 'method'   => $method,
-                'status'   => 'completed',
+                'status'   => $paymentStatus,
             ]);
 
             // Create Delivery

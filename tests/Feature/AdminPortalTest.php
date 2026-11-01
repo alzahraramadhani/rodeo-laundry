@@ -199,5 +199,88 @@ class AdminPortalTest extends TestCase
             'status'   => 'completed',
         ]);
     }
+
+    public function test_pos_payment_is_pending_when_cash_received_is_less_than_total(): void
+    {
+        $customer = Customer::create([
+            'name'    => 'Ahmad Fauzi',
+            'phone'   => '081234567890',
+            'city'    => 'Kota Malang',
+            'address' => 'Jl. Suhat',
+        ]);
+
+        $service = ServiceType::create([
+            'name'        => 'Cuci Kering Biasa',
+            'price'       => 50000,
+            'description' => 'Test Layanan',
+        ]);
+
+        $response = $this->actingAs($this->admin)->post('/admin/pos/order', [
+            'customer_id'    => $customer->id,
+            'payment_method' => 'cash',
+            'cash_received'  => 30000, // Kurang dari 50000!
+            'items'          => [
+                ['id' => $service->id, 'qty' => 1],
+            ],
+        ]);
+
+        $response->assertRedirect('/admin/pos');
+        $this->assertDatabaseHas('payments', [
+            'amount' => 50000,
+            'method' => 'cash',
+            'status' => 'pending', // Harus pending, bukan completed!
+        ]);
+    }
+
+    public function test_customer_creation_validates_alpha_name_and_numeric_phone(): void
+    {
+        // Name containing numbers should fail
+        $response1 = $this->actingAs($this->admin)->post('/admin/customers', [
+            'name'    => '1678',
+            'phone'   => '08123456789',
+            'city'    => 'Kota Malang',
+            'address' => 'Jl. Ijen',
+        ]);
+        $response1->assertSessionHasErrors('name');
+
+        // Phone containing letters should fail
+        $response2 = $this->actingAs($this->admin)->post('/admin/customers', [
+            'name'    => 'Budi Santoso',
+            'phone'   => 'abcde123',
+            'city'    => 'Kota Malang',
+            'address' => 'Jl. Ijen',
+        ]);
+        $response2->assertSessionHasErrors('phone');
+    }
+
+    public function test_admin_can_view_order_receipt(): void
+    {
+        $customer = Customer::create([
+            'name'    => 'Siti Rahmawati',
+            'phone'   => '081234567891',
+            'city'    => 'Kota Malang',
+            'address' => 'Jl. Dinoyo',
+        ]);
+
+        $order = Order::create([
+            'customer_id' => $customer->id,
+            'total_price' => 45000,
+            'status'      => 'processing',
+        ]);
+
+        $response = $this->actingAs($this->admin)->get("/admin/orders/{$order->id}/receipt");
+        $response->assertStatus(200);
+        $response->assertSee('RODEO LAUNDRY');
+        $response->assertSee('Siti Rahmawati');
+        $response->assertSee('#RD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT));
+    }
+
+    public function test_dashboard_stat_cards_show_order_dalam_proses_and_order_selesai(): void
+    {
+        $response = $this->actingAs($this->admin)->get('/admin/dashboard');
+        $response->assertStatus(200);
+        $response->assertSee('Order Dalam Proses');
+        $response->assertSee('Order Selesai');
+    }
 }
 
