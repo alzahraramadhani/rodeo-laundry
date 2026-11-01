@@ -52,11 +52,14 @@ class AdminCustomerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'    => 'required|string|max:100',
+            'name'    => ['required', 'string', 'max:100', 'regex:/^[\pL\s\.\,\'\-]+$/u'],
             'email'   => 'nullable|email|max:100',
-            'phone'   => 'required|string|max:20',
+            'phone'   => ['required', 'string', 'max:20', 'regex:/^[0-9]+$/'],
             'city'    => 'required|string|max:50',
             'address' => 'required|string',
+        ], [
+            'name.regex'  => 'Nama lengkap hanya boleh berisi huruf dan spasi.',
+            'phone.regex' => 'Nomor telepon hanya boleh berisi angka.',
         ]);
 
         Customer::create($validated);
@@ -67,11 +70,14 @@ class AdminCustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $validated = $request->validate([
-            'name'    => 'required|string|max:100',
+            'name'    => ['required', 'string', 'max:100', 'regex:/^[\pL\s\.\,\'\-]+$/u'],
             'email'   => 'nullable|email|max:100',
-            'phone'   => 'required|string|max:20',
+            'phone'   => ['required', 'string', 'max:20', 'regex:/^[0-9]+$/'],
             'city'    => 'required|string|max:50',
             'address' => 'required|string',
+        ], [
+            'name.regex'  => 'Nama lengkap hanya boleh berisi huruf dan spasi.',
+            'phone.regex' => 'Nomor telepon hanya boleh berisi angka.',
         ]);
 
         $customer->update($validated);

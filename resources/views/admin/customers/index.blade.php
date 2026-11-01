@@ -223,6 +223,9 @@
                                 <input type="text"
                                        name="name"
                                        x-model="formData.name"
+                                       @input="formData.name = formData.name.replace(/[^a-zA-Z\s]/g, '')"
+                                       pattern="[a-zA-Z\s]+"
+                                       title="Nama hanya boleh berisi huruf dan spasi"
                                        required
                                        placeholder="Contoh: Bambang Setyawan"
                                        class="w-full pl-10 pr-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
@@ -253,8 +256,11 @@
                                 <input type="text"
                                        name="phone"
                                        x-model="formData.phone"
+                                       @input="formData.phone = formData.phone.replace(/[^0-9]/g, '')"
+                                       pattern="[0-9]+"
+                                       title="Nomor telepon hanya boleh berisi angka"
                                        required
-                                       placeholder="878-1123-9081"
+                                       placeholder="87811239081"
                                        class="w-full px-3 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-r-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
                             </div>
                         </div>
