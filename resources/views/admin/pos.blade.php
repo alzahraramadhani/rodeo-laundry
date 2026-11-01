@@ -26,7 +26,7 @@
                             <input type="text"
                                    x-model="customerQuery"
                                    @focus="customerDropdown = true"
-                                   placeholder="Ketik nama atau no HP pelanggan..."
+                                   placeholder="Ketik ID pelanggan (#RD-...) atau nama pelanggan..."
                                    class="w-full pl-10 pr-4 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-sm text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] focus:ring-1 focus:ring-[#1E1B4B] transition">
 
                             <!-- Autocomplete Dropdown -->
@@ -37,7 +37,10 @@
                                     <div @click="selectCustomer(c)"
                                          class="p-3 hover:bg-[#F8F9FD] cursor-pointer border-b border-[#F0F2F8] last:border-0 flex items-center justify-between transition">
                                         <div>
-                                            <div class="text-sm font-bold text-[#1E1B4B]" x-text="c.name"></div>
+                                            <div class="text-sm font-bold text-[#1E1B4B]">
+                                                <span class="text-xs text-[#64748B] font-mono mr-1.5" x-text="'#RD-' + String(c.id).padStart(4, '0')"></span>
+                                                <span x-text="c.name"></span>
+                                            </div>
                                             <div class="text-xs text-[#64748B]" x-text="(c.phone || '-') + ' • ' + (c.city || 'Malang')"></div>
                                         </div>
                                         <span class="text-xs text-[#BFF108] bg-[#1E1B4B] px-2 py-0.5 rounded-full font-bold">Pilih</span>
@@ -45,14 +48,6 @@
                                 </template>
                             </div>
                         </div>
-
-                        <!-- Scan Card Button -->
-                        <button type="button" @click="scanCardModal = true" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-[#F1F3FA] hover:bg-[#E2E6F2] text-[#1E1B4B] text-xs font-bold rounded-2xl transition">
-                            <svg class="w-4 h-4 text-[#1E1B4B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
-                            </svg>
-                            <span>Scan Kartu</span>
-                        </button>
                     </div>
 
                     <!-- Selected Customer Pill / Card -->
@@ -350,22 +345,23 @@
                 customers: rawCustomers,
                 customerQuery: '',
                 customerDropdown: false,
-                selectedCustomer: rawCustomers.length > 0 ? rawCustomers[0] : null,
-                cart: [
-                    { id: 1, name: 'Cuci Komplit Kiloan', price: 8000, qty: 4.8, unit: 'kg' },
-                    { id: 3, name: 'Jas / Blazer Dry Clean', price: 35000, qty: 1, unit: 'pcs' }
-                ],
-                paymentMethod: 'qris',
-                cashReceived: 75000,
-                scanCardModal: false,
+                selectedCustomer: null,
+                cart: [],
+                paymentMethod: 'cash',
+                cashReceived: 0,
 
                 get filteredCustomers() {
-                    if (!this.customerQuery) return this.customers.slice(0, 5);
-                    const q = this.customerQuery.toLowerCase();
-                    return this.customers.filter(c => 
-                        (c.name && c.name.toLowerCase().includes(q)) || 
-                        (c.phone && c.phone.includes(q))
-                    ).slice(0, 5);
+                    if (!this.customerQuery) return this.customers.slice(0, 6);
+                    const raw = this.customerQuery.toLowerCase().trim();
+                    const cleanId = raw.replace('#rd-', '').replace('#', '').trim();
+                    return this.customers.filter(c => {
+                        const idStr = String(c.id);
+                        const paddedId = String(c.id).padStart(4, '0');
+                        const matchId = (cleanId !== '' && (idStr.includes(cleanId) || paddedId.includes(cleanId)));
+                        const matchName = c.name && c.name.toLowerCase().includes(raw);
+                        const matchPhone = c.phone && c.phone.includes(raw);
+                        return matchId || matchName || matchPhone;
+                    }).slice(0, 6);
                 },
 
                 selectCustomer(c) {
@@ -393,10 +389,13 @@
                         this.cart.push({
                             id: id,
                             name: name,
-                            price: price,
-                            qty: unit === 'kg' ? 2.0 : 1,
+                            price: Number(price),
+                            qty: unit === 'kg' ? 1.0 : 1,
                             unit: unit
                         });
+                    }
+                    if (this.cashReceived === 0 || this.cashReceived < this.totalCart) {
+                        this.cashReceived = this.totalCart;
                     }
                 },
 
