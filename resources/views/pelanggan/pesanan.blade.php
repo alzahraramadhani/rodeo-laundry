@@ -185,7 +185,22 @@
                             </div>
                             <span class="text-[10px] md:text-xs text-[#47464E]" x-text="order.date"></span>
                         </div>
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <!-- Badge Status Pembayaran -->
+                            <span class="px-3 py-1 rounded-full text-[10px] md:text-xs font-bold flex items-center gap-1.5"
+                                  :class="order.payment_status === 'completed'
+                                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                      : (order.payment_status === 'failed'
+                                          ? 'bg-red-50 text-red-600 border border-red-200'
+                                          : 'bg-amber-50 text-amber-700 border border-amber-200')">
+                                <span class="w-1.5 h-1.5 rounded-full"
+                                      :class="order.payment_status === 'completed'
+                                          ? 'bg-emerald-500'
+                                          : (order.payment_status === 'failed' ? 'bg-red-500' : 'bg-amber-500')"></span>
+                                <span x-text="order.payment_status_label || (order.payment_status === 'completed' ? 'Lunas' : 'Menunggu Pembayaran')"></span>
+                            </span>
+
+                            <!-- Badge Status Cucian -->
                             <span class="px-3 py-1 rounded-full text-[10px] md:text-xs font-bold flex items-center gap-1.5"
                                   :class="statusColor(order.status).bg + ' ' + statusColor(order.status).text">
                                 <span class="w-1.5 h-1.5 rounded-full" :class="statusColor(order.status).dot"></span>
@@ -287,7 +302,12 @@
                     <!-- Footer Kartu -->
                     <div class="px-4 md:px-8 py-4 bg-[#FAF8FF] border-t border-[#E2E7FF]/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div>
-                            <span class="text-[10px] md:text-xs text-[#47464E]">Total Pembayaran</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] md:text-xs text-[#47464E]">Total Pembayaran</span>
+                                <template x-if="order.payment_method_label && order.payment_method_label !== '-'">
+                                    <span class="text-[10px] md:text-xs text-[#717082]" x-text="'(' + order.payment_method_label + ')'"></span>
+                                </template>
+                            </div>
                             <div class="text-lg md:text-xl font-extrabold text-[#1A1743]" x-text="formatRp(order.total)"></div>
                         </div>
 

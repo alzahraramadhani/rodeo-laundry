@@ -117,9 +117,16 @@
                 if (!res.ok) { 
                     this.error = 'Gagal membuat pesanan, silakan coba lagi.'; 
                     this.submitting = false; 
-                    return; 
-                }
-                ['cart_kiloan', 'cart_service_qty', 'cart_notes', 'cart_service_notes', 'cart_courier_notes', 'cart_pickup', 'cart_address'].forEach(k => localStorage.removeItem('_x_' + k));
+                ['cart_kiloan', 'cart_service_qty', 'cart_notes', 'cart_service_notes', 'cart_courier_notes', 'cart_pickup', 'cart_delivery', 'cart_address'].forEach(k => {
+                    localStorage.removeItem(k);
+                    localStorage.removeItem('_x_' + k);
+                });
+                this.kiloan = 0;
+                this.serviceQty = {};
+                this.serviceNotes = {};
+                this.notes = '';
+                this.courierNotes = '';
+                this.cartAddress = '';
                 const data = await res.json();
                 window.location = data.redirect;
             } catch (err) {

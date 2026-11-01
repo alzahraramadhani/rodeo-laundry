@@ -72,12 +72,16 @@ class AdminPaymentController extends Controller
             'status'   => 'required|in:pending,completed,failed',
         ]);
 
-        Payment::create([
+        $payment = Payment::create([
             'order_id' => $request->order_id,
             'amount'   => $request->amount,
             'method'   => $request->method,
             'status'   => $request->status,
         ]);
+
+        if ($request->status === 'completed' && $payment->order && $payment->order->status === 'pending') {
+            $payment->order->update(['status' => 'processing']);
+        }
 
         return redirect()->route('admin.payments.index')->with('success', 'Penerimaan pembayaran Nota #' . $request->order_id . ' berhasil dicatat!');
     }
@@ -95,6 +99,10 @@ class AdminPaymentController extends Controller
             'method' => $request->method,
             'status' => $request->status,
         ]);
+
+        if ($request->status === 'completed' && $payment->order && $payment->order->status === 'pending') {
+            $payment->order->update(['status' => 'processing']);
+        }
 
         return redirect()->route('admin.payments.index')->with('success', 'Status pembayaran Nota #' . $payment->order_id . ' berhasil diperbarui!');
     }

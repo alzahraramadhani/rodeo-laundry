@@ -34,6 +34,46 @@ class CustomerCheckoutTest extends TestCase
         $this->assertStringContainsString('Jl. Ijen No. 10', $order->delivery->address);
     }
 
+    public function test_customer_orders_page_displays_payment_status_and_advances_on_admin_approval(): void
+    {
+        $user = User::factory()->create();
+        $svc = ServiceType::create(['name' => 'Cuci Kiloan', 'price' => 8000, 'description' => 'x']);
+
+        $this->actingAs($user)->postJson('/pesan', [
+            'items' => [['id' => $svc->id, 'qty' => 2]],
+            'payment_method' => 'qris',
+            'pickup' => 'self',
+        ])->assertOk();
+
+        $order = Order::with('payment')->first();
+        $this->assertEquals('pending', $order->status);
+        $this->assertEquals('pending', $order->payment->status);
+
+        // Cek halaman pesanan pelanggan awal: harus terlihat Menunggu Pembayaran
+        $response = $this->actingAs($user)->get('/pesanan');
+        $response->assertOk();
+        $response->assertSee('Menunggu Pembayaran');
+
+        // Admin menyetujui pembayaran menjadi 'completed' (Lunas)
+        $admin = User::factory()->admin()->create();
+        $this->actingAs($admin)->put("/admin/payments/{$order->payment->id}", [
+            'amount' => 16000,
+            'method' => 'e-wallet',
+            'status' => 'completed',
+        ])->assertRedirect('/admin/payments');
+
+        // Cek database: payment jadi completed dan order otomatis maju ke 'processing' (Sedang Dicuci)
+        $order->refresh();
+        $this->assertEquals('completed', $order->payment->status);
+        $this->assertEquals('processing', $order->status);
+
+        // Pelanggan buka kembali halaman pesanannya: harus terlihat 'Lunas' dan 'Sedang Dicuci'
+        $responseAfter = $this->actingAs($user)->get('/pesanan');
+        $responseAfter->assertOk();
+        $responseAfter->assertSee('Lunas');
+        $responseAfter->assertSee('Sedang Dicuci');
+    }
+
     public function test_guest_cannot_checkout(): void
     {
         $this->postJson('/pesan', [])->assertUnauthorized();

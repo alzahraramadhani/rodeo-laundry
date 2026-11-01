@@ -33,13 +33,33 @@ class OrderController extends Controller
         ];
 
         $formattedOrders = $orders->map(function ($order) use ($statusLabels) {
+            $payment = $order->payment;
+            $paymentStatus = $payment->status ?? 'pending';
+
+            $paymentStatusLabels = [
+                'pending'   => 'Menunggu Pembayaran',
+                'completed' => 'Lunas',
+                'failed'    => 'Gagal',
+            ];
+
+            $paymentMethodLabels = [
+                'cash'        => 'Tunai (COD)',
+                'transfer'    => 'Transfer Bank (VA)',
+                'e-wallet'    => 'QRIS / E-Wallet',
+                'credit_card' => 'Kartu Kredit',
+            ];
+
             return [
-                'id'             => 'ROD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT),
-                'raw_id'         => $order->id,
-                'date'           => $order->created_at ? $order->created_at->translatedFormat('d F Y, H:i') : '-',
-                'status'         => $order->status,
-                'statusLabel'    => $statusLabels[$order->status] ?? ucfirst($order->status),
-                'items'          => $order->items->map(function ($item) {
+                'id'                   => 'ROD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT),
+                'raw_id'               => $order->id,
+                'date'                 => $order->created_at ? $order->created_at->translatedFormat('d F Y, H:i') : '-',
+                'status'               => $order->status,
+                'statusLabel'          => $statusLabels[$order->status] ?? ucfirst($order->status),
+                'payment_status'       => $paymentStatus,
+                'payment_status_label' => $paymentStatusLabels[$paymentStatus] ?? ucfirst($paymentStatus),
+                'payment_method'       => $payment->method ?? '-',
+                'payment_method_label' => $paymentMethodLabels[$payment->method ?? ''] ?? ucfirst($payment->method ?? '-'),
+                'items'                => $order->items->map(function ($item) {
                     $name = strtolower($item->service->name ?? '');
                     $unit = 'pcs';
                     if (str_contains($name, 'kiloan')) $unit = 'kg';
@@ -55,7 +75,7 @@ class OrderController extends Controller
                 }),
                 'total'          => (int) $order->total_price,
                 'address'        => $order->delivery->address ?? ($order->customer->address ?? 'Ambil di Outlet Rodeo Malang'),
-                'canCancel'      => $order->status === 'pending',
+                'canCancel'      => $order->status === 'pending' && $paymentStatus !== 'completed',
                 'canEditAddress' => in_array($order->status, ['pending', 'processing']),
             ];
         });
