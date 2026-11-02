@@ -45,7 +45,7 @@
 
             <!-- Right Side -->
             <div class="flex items-center gap-2 md:gap-3">
-                <a href="https://wa.me/6281234567890" target="_blank" class="hidden sm:flex items-center gap-2 px-3 md:px-4 py-2 bg-[#EAEDFF] hover:bg-[#dfe4ff] rounded-full text-xs md:text-sm font-semibold text-[#131B2E] transition">
+                <a href="https://wa.me/6281358055257" target="_blank" class="hidden sm:flex items-center gap-2 px-3 md:px-4 py-2 bg-[#EAEDFF] hover:bg-[#dfe4ff] rounded-full text-xs md:text-sm font-semibold text-[#131B2E] transition">
                     <i class="fa-brands fa-whatsapp text-sm md:text-base text-[#25D366]"></i> WhatsApp
                 </a>
 
@@ -101,6 +101,17 @@
                 <a href="{{ route('pesanan.index') }}" class="flex items-center px-4 py-3 rounded-xl text-sm font-semibold text-[#47464E] hover:bg-[#F2F3FF] hover:text-[#1A1743] transition">
                     <i class="fa-solid fa-receipt w-5 text-center text-[#9895C8] mr-2"></i> Pesanan
                 </a>
+                <a href="https://wa.me/6281358055257" target="_blank" class="flex items-center px-4 py-3 rounded-xl text-sm font-semibold text-[#47464E] hover:bg-[#F2F3FF] hover:text-[#1A1743] transition">
+                    <i class="fa-brands fa-whatsapp w-5 text-center text-[#25D366] mr-2"></i> Hubungi WhatsApp
+                </a>
+                @auth
+                    <form method="POST" action="{{ route('logout') }}" class="pt-2 border-t border-[#E2E7FF]">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center px-4 py-3 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 transition">
+                            <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center text-red-500 mr-2"></i> Keluar
+                        </button>
+                    </form>
+                @endauth
             </div>
         </div>
     </header>

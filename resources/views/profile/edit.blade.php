@@ -21,10 +21,18 @@
                     <div class="text-base md:text-lg font-semibold leading-none">
                         Rodeo Laundry<span class="text-[#bff108ff]">.</span>
                     </div>
-                    <div class="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-[#47464E] mt-1">Malang</div>
+                    <div class="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-[#47464E] mt-1">Batu</div>
                 </div>
             </a>
-            <a href="{{ url('/') }}" class="text-sm font-bold text-[#1A1743] hover:underline hidden sm:block">Kembali ke Beranda</a>
+            <div class="flex items-center gap-3">
+                <a href="{{ url('/') }}" class="text-sm font-bold text-[#1A1743] hover:underline hidden sm:block">Kembali ke Beranda</a>
+                <form method="POST" action="{{ route('logout') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="px-3 py-1.5 rounded-full bg-[#1A1743] hover:bg-[#2F2D59] text-white text-xs font-semibold shadow-sm transition" title="Keluar">
+                        Keluar
+                    </button>
+                </form>
+            </div>
         </div>
     </header>
 

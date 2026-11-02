@@ -201,16 +201,24 @@
 
             <!-- Right Side -->
             <div class="flex items-center gap-2 md:gap-3">
-                <a href="https://wa.me/6281234567890" target="_blank" class="hidden sm:flex items-center gap-2 px-3 md:px-4 py-2 bg-[#EAEDFF] hover:bg-[#dfe4ff] rounded-full text-xs md:text-sm font-semibold text-[#131B2E] transition">
+                <a href="https://wa.me/6281358055257" target="_blank" class="hidden sm:flex items-center gap-2 px-3 md:px-4 py-2 bg-[#EAEDFF] hover:bg-[#dfe4ff] rounded-full text-xs md:text-sm font-semibold text-[#131B2E] transition">
                     <i class="fa-brands fa-whatsapp text-sm md:text-base text-[#25D366]"></i> WhatsApp
                 </a>
 
                 @auth
-                    <a href="{{ route('profile.edit') }}" 
-                class="w-8 h-8 md:w-9 md:h-9 bg-[#1A1743] hover:bg-[#2F2D59] text-white rounded-full flex items-center justify-center transition shadow-sm shrink-0" 
-                title="Profil Saya">
-                    <i class="fa-regular fa-user text-xs md:text-sm"></i>
-                </a>
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('profile.edit') }}" 
+                           class="w-8 h-8 md:w-9 md:h-9 bg-[#1A1743] hover:bg-[#2F2D59] text-white rounded-full flex items-center justify-center transition shadow-sm shrink-0" 
+                           title="{{ Auth::user()->username ?? 'Profil Saya' }}">
+                            <i class="fa-regular fa-user text-xs md:text-sm"></i>
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
+                            @csrf
+                            <button type="submit" class="text-xs text-[#47464E] hover:text-[#1A1743] font-medium hidden sm:inline px-2 py-1" title="Keluar">
+                                Keluar
+                            </button>
+                        </form>
+                    </div>
                 @else
                     <a href="{{ route('login') }}" class="px-4 md:px-5 py-2 bg-[#1A1743] text-white rounded-full text-xs md:text-sm font-bold hover:bg-[#2F2D59] shadow-sm transition">
                         Masuk
@@ -250,9 +258,17 @@
                 <a href="{{ route('pesanan.index') }}" class="flex items-center px-4 py-3 rounded-xl text-sm font-semibold text-[#47464E] hover:bg-[#F2F3FF] hover:text-[#1A1743] transition">
                     <i class="fa-solid fa-receipt w-5 text-center text-[#9895C8] mr-2"></i> Pesanan
                 </a>
-                <a href="https://wa.me/6281234567890" target="_blank" class="flex items-center px-4 py-3 rounded-xl text-sm font-semibold text-[#47464E] hover:bg-[#F2F3FF] hover:text-[#1A1743] transition">
+                <a href="https://wa.me/6281358055257" target="_blank" class="flex items-center px-4 py-3 rounded-xl text-sm font-semibold text-[#47464E] hover:bg-[#F2F3FF] hover:text-[#1A1743] transition">
                     <i class="fa-brands fa-whatsapp w-5 text-center text-[#25D366] mr-2"></i> Hubungi WhatsApp
                 </a>
+                @auth
+                    <form method="POST" action="{{ route('logout') }}" class="pt-2 border-t border-[#E2E7FF]">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center px-4 py-3 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 transition">
+                            <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center text-red-500 mr-2"></i> Keluar
+                        </button>
+                    </form>
+                @endauth
             </div>
         </div>
     </header>
