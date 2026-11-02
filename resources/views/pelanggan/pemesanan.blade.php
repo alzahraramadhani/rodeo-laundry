@@ -358,29 +358,34 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
                 <!-- Cuci Kiloan di grid (Belum Dipilih) -->
                 <template x-if="kiloan === 0 && kiloanExists">
-                    <div class="bg-white p-4 md:p-6 rounded-[20px] md:rounded-[28px] border border-slate-300/80 flex flex-col justify-between 
-                                shadow-[0_4px_16px_rgba(26,23,67,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(26,23,67,0.12)] hover:-translate-y-1 transition-all duration-300">
-                        <div>
+                    <div class="group bg-white hover:bg-[#1E1B4B] p-4 md:p-6 rounded-[20px] md:rounded-[28px] border border-slate-300/80 hover:border-[#1E1B4B] flex flex-col justify-between 
+                                shadow-[0_4px_16px_rgba(26,23,67,0.05)] hover:shadow-xl hover:shadow-[#1E1B4B]/25 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden cursor-pointer"
+                         @click="addKiloan()">
+                        
+                        <!-- Subtle glow bubble on bottom-right corner -->
+                        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/0 group-hover:bg-white/5 pointer-events-none transition-all duration-300"></div>
+
+                        <div class="relative z-10">
                             <div class="flex justify-between items-start mb-3 md:mb-4 gap-2">
-                                <div class="w-9 h-9 md:w-10 md:h-10 bg-[#1A1743] rounded-xl flex items-center justify-center shrink-0 text-[#BFF138]">
+                                <div class="w-9 h-9 md:w-10 md:h-10 bg-indigo-50 group-hover:bg-white/10 rounded-xl flex items-center justify-center shrink-0 text-[#1E1B4B] group-hover:text-[#BFF138] transition-colors duration-300">
                                     <!-- SVG MESIN CUCI -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 256 256">
                                         <rect width="256" height="256" fill="none"/>
                                         <path d="M201,40H179.35L165.66,26.34A8,8,0,0,0,160,24H96a8,8,0,0,0-5.66,2.34L76.65,40H55A15,15,0,0,0,40,55V209a15,15,0,0,0,15,15h61a4,4,0,0,0,4-4V104.27A8.18,8.18,0,0,1,127.47,96a8,8,0,0,1,8.53,8V220a4,4,0,0,0,4,4h61a15,15,0,0,0,15-15V55A15,15,0,0,0,201,40ZM86.54,107.08A4,4,0,0,1,80,104V59.31L95.24,44.07l23.47,35.21ZM128,80h0v0Zm48,24a4,4,0,0,1-2.3,3.63,3.93,3.93,0,0,1-4.21-.51l-32.2-27.82,23.47-35.21L176,59.31Z" fill="currentColor"/>
                                     </svg>
                                 </div>
-                                <span class="px-2 md:px-2.5 py-0.5 bg-[#EAEDFF] rounded-full text-[10px] md:text-xs font-bold text-[#1A1743] shrink-0">Layanan</span>
+                                <span class="px-2 md:px-2.5 py-0.5 bg-[#EAEDFF] group-hover:bg-white/10 group-hover:text-slate-200 rounded-full text-[10px] md:text-xs font-bold text-[#1A1743] shrink-0 transition-colors duration-300">Layanan</span>
                             </div>
-                            <h3 class="text-base md:text-lg font-bold mb-1" x-text="kiloanName"></h3>
-                            <p class="text-xs md:text-sm text-[#47464E] mb-4 md:mb-5 line-clamp-2" x-text="kiloanDescription"></p>
+                            <h3 class="text-base md:text-lg font-bold mb-1 text-[#1E1B4B] group-hover:text-white transition-colors duration-300" x-text="kiloanName"></h3>
+                            <p class="text-xs md:text-sm text-[#47464E] group-hover:text-slate-300 mb-4 md:mb-5 line-clamp-2 transition-colors duration-300" x-text="kiloanDescription"></p>
                         </div>
-                        <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-slate-200/90 gap-2">
-                            <div class="text-base md:text-lg font-extrabold shrink-0">
+                        <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-slate-200/90 group-hover:border-white/10 gap-2 relative z-10 transition-colors duration-300">
+                            <div class="text-base md:text-lg font-extrabold shrink-0 text-[#1E1B4B] group-hover:text-[#BFF138] transition-colors duration-300">
                                 <span x-text="formatRp(hargaKiloan)"></span>
-                                <span class="text-[10px] md:text-xs font-normal text-[#47464E]">/ kg</span>
+                                <span class="text-[10px] md:text-xs font-normal text-[#47464E] group-hover:text-slate-300 transition-colors duration-300">/ kg</span>
                             </div>
-                            <button @click="addKiloan()"
-                                    class="px-3 md:px-4 py-1.5 bg-[#EAEDFF] hover:bg-[#1A1743] hover:text-white text-[#1A1743] rounded-full text-[10px] md:text-xs font-bold transition shrink-0 flex items-center gap-1">
+                            <button @click.stop="addKiloan()"
+                                    class="px-3 md:px-4 py-1.5 bg-[#EAEDFF] group-hover:bg-[#BFF138] text-[#1A1743] group-hover:text-[#1E1B4B] rounded-full text-[10px] md:text-xs font-bold transition-all duration-300 shrink-0 flex items-center gap-1 shadow-xs">
                                 <i class="fa-solid fa-plus text-[10px]"></i> Tambah
                             </button>
                         </div>
@@ -389,11 +394,16 @@
 
                 <!-- Layanan lain -->
                 <template x-for="service in availableServices" :key="'avail-' + service.id">
-                    <div class="bg-white p-4 md:p-6 rounded-[20px] md:rounded-[28px] border border-slate-300/80 flex flex-col justify-between 
-                                shadow-[0_4px_16px_rgba(26,23,67,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(26,23,67,0.12)] hover:-translate-y-1 transition-all duration-300">
-                        <div>
+                    <div class="group bg-white hover:bg-[#1E1B4B] p-4 md:p-6 rounded-[20px] md:rounded-[28px] border border-slate-300/80 hover:border-[#1E1B4B] flex flex-col justify-between 
+                                shadow-[0_4px_16px_rgba(26,23,67,0.05)] hover:shadow-xl hover:shadow-[#1E1B4B]/25 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden cursor-pointer"
+                         @click="addService(service.id)">
+                        
+                        <!-- Subtle glow bubble on bottom-right corner -->
+                        <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/0 group-hover:bg-white/5 pointer-events-none transition-all duration-300"></div>
+
+                        <div class="relative z-10">
                             <div class="flex justify-between items-start mb-3 md:mb-4 gap-2">
-                                <div class="w-9 h-9 md:w-10 md:h-10 bg-[#1A1743] rounded-xl flex items-center justify-center shrink-0 text-[#C2F43B]">
+                                <div class="w-9 h-9 md:w-10 md:h-10 bg-indigo-50 group-hover:bg-white/10 rounded-xl flex items-center justify-center shrink-0 text-[#1E1B4B] group-hover:text-[#C2F43B] transition-colors duration-300">
                                     
                                     <!-- LOGIKA ICON GORDEN (SVG) -->
                                     <template x-if="service.name.toLowerCase().includes('gorden')">
@@ -408,18 +418,18 @@
                                     </template>
 
                                 </div>
-                                <span class="px-2 md:px-2.5 py-0.5 bg-[#EAEDFF] rounded-full text-[10px] md:text-xs font-bold text-[#1A1743] shrink-0" x-text="service.tag"></span>
+                                <span class="px-2 md:px-2.5 py-0.5 bg-[#EAEDFF] group-hover:bg-white/10 group-hover:text-slate-200 rounded-full text-[10px] md:text-xs font-bold text-[#1A1743] shrink-0 transition-colors duration-300" x-text="service.tag"></span>
                             </div>
-                            <h3 class="text-base md:text-lg font-bold mb-1" x-text="service.name"></h3>
-                            <p class="text-xs md:text-sm text-[#47464E] mb-4 md:mb-5 line-clamp-2" x-text="service.description"></p>
+                            <h3 class="text-base md:text-lg font-bold mb-1 text-[#1E1B4B] group-hover:text-white transition-colors duration-300" x-text="service.name"></h3>
+                            <p class="text-xs md:text-sm text-[#47464E] group-hover:text-slate-300 mb-4 md:mb-5 line-clamp-2 transition-colors duration-300" x-text="service.description"></p>
                         </div>
-                        <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-slate-200/90 gap-2">
-                            <div class="text-base md:text-lg font-extrabold shrink-0">
+                        <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-slate-200/90 group-hover:border-white/10 gap-2 relative z-10 transition-colors duration-300">
+                            <div class="text-base md:text-lg font-extrabold shrink-0 text-[#1E1B4B] group-hover:text-[#BFF138] transition-colors duration-300">
                                 <span x-text="formatRp(service.price)"></span>
-                                <span class="text-[10px] md:text-xs font-normal text-[#47464E]" x-text="'/ ' + service.unit"></span>
+                                <span class="text-[10px] md:text-xs font-normal text-[#47464E] group-hover:text-slate-300 transition-colors duration-300" x-text="'/ ' + service.unit"></span>
                             </div>
-                            <button @click="addService(service.id)"
-                                    class="px-3 md:px-4 py-1.5 bg-[#EAEDFF] hover:bg-[#1A1743] hover:text-white text-[#1A1743] rounded-full text-[10px] md:text-xs font-bold transition shrink-0 flex items-center gap-1">
+                            <button @click.stop="addService(service.id)"
+                                    class="px-3 md:px-4 py-1.5 bg-[#EAEDFF] group-hover:bg-[#BFF138] text-[#1A1743] group-hover:text-[#1E1B4B] rounded-full text-[10px] md:text-xs font-bold transition-all duration-300 shrink-0 flex items-center gap-1 shadow-xs">
                                 <i class="fa-solid fa-plus text-[10px]"></i> Tambah
                             </button>
                         </div>
