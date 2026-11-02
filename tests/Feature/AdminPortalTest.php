@@ -329,5 +329,27 @@ class AdminPortalTest extends TestCase
         $this->assertStringContainsString('Rahmat Hidayat', $content);
         $this->assertStringContainsString('#RD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT), $content);
     }
+
+    public function test_admin_layout_renders_operational_notifications(): void
+    {
+        $customer = Customer::create([
+            'name'    => 'Bayu Skak',
+            'phone'   => '081299900011',
+            'city'    => 'Kota Malang',
+            'address' => 'Jl. Veteran',
+        ]);
+
+        Order::create([
+            'customer_id' => $customer->id,
+            'total_price' => 35000,
+            'status'      => 'pending',
+        ]);
+
+        $response = $this->actingAs($this->admin)->get('/admin/dashboard');
+        $response->assertStatus(200);
+        $response->assertSee('Pemberitahuan');
+        $response->assertSee('Pesanan Baru Masuk');
+        $response->assertSee('Bayu Skak');
+    }
 }
 

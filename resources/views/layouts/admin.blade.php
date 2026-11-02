@@ -233,13 +233,105 @@
                         </label>
                     </form>
 
-                    <!-- Notification Bell -->
-                    <button class="relative w-10 h-10 rounded-full bg-slate-100/90 hover:bg-white border border-slate-300/80 flex items-center justify-center text-slate-700 hover:text-[#1E1B4B] transition shadow-xs">
-                        <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                        </svg>
-                        <span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
-                    </button>
+                    <!-- Notification Bell with Interactive Dropdown Popover -->
+                    <div class="relative" x-data="{ notifOpen: false }">
+                        <button type="button"
+                                @click="notifOpen = !notifOpen"
+                                class="relative w-10 h-10 rounded-full bg-slate-100/90 hover:bg-white border border-slate-300/80 flex items-center justify-center text-slate-700 hover:text-[#1E1B4B] transition shadow-xs cursor-pointer focus:outline-none"
+                                :class="notifOpen ? 'bg-white ring-2 ring-[#1E1B4B]/20 text-[#1E1B4B]' : ''"
+                                title="Pemberitahuan & Notifikasi Operasional">
+                            <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                            @if(($adminUnreadCount ?? 0) > 0)
+                                <span class="absolute -top-1 -right-1 min-w-5 h-5 px-1 bg-rose-500 text-white text-[10px] font-extrabold rounded-full flex items-center justify-center ring-2 ring-white shadow-xs">
+                                    {{ $adminUnreadCount > 9 ? '9+' : $adminUnreadCount }}
+                                </span>
+                            @endif
+                        </button>
+
+                        <!-- Notification Dropdown Menu -->
+                        <div x-show="notifOpen"
+                             @click.outside="notifOpen = false"
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95 translate-y-1"
+                             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 scale-95 translate-y-1"
+                             class="absolute right-0 mt-3 w-80 sm:w-96 bg-white rounded-3xl shadow-2xl border border-slate-200 py-3 z-50 overflow-hidden"
+                             style="display: none;">
+                            
+                            <!-- Header Popover -->
+                            <div class="px-4 py-2 border-b border-slate-100 flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <h4 class="text-sm font-extrabold text-[#1E1B4B]">Pemberitahuan</h4>
+                                    @if(($adminUnreadCount ?? 0) > 0)
+                                        <span class="px-2 py-0.5 bg-[#BFF108] text-[#1E1B4B] text-[10px] font-extrabold rounded-full">
+                                            {{ $adminUnreadCount }} Aktif
+                                        </span>
+                                    @endif
+                                </div>
+                                <span class="text-[11px] text-slate-500 font-medium">Operasional Rodeo</span>
+                            </div>
+
+                            <!-- List of Notifications -->
+                            <div class="max-h-80 overflow-y-auto divide-y divide-slate-100">
+                                @forelse(($adminNotifications ?? []) as $notif)
+                                    <a href="{{ $notif['url'] }}"
+                                       @click="notifOpen = false"
+                                       class="p-3.5 hover:bg-slate-50 flex items-start gap-3 transition group text-left">
+                                        <div class="w-9 h-9 rounded-2xl {{ $notif['icon_bg'] }} flex items-center justify-center shrink-0 mt-0.5">
+                                            @if($notif['icon'] === 'clock')
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5l3 3"/></svg>
+                                            @elseif($notif['icon'] === 'check')
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                            @elseif($notif['icon'] === 'truck')
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1"/></svg>
+                                            @else
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                                            @endif
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between gap-1 mb-0.5">
+                                                <span class="text-xs font-bold text-[#1E1B4B] group-hover:text-indigo-600 transition truncate">
+                                                    {{ $notif['title'] }}
+                                                </span>
+                                                <span class="text-[10px] text-slate-500 font-semibold shrink-0">
+                                                    {{ $notif['time'] }}
+                                                </span>
+                                            </div>
+                                            <p class="text-xs text-slate-600 line-clamp-2">
+                                                {{ $notif['message'] }}
+                                            </p>
+                                            <div class="mt-1.5 flex items-center gap-1.5">
+                                                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold {{ $notif['badge_color'] }}">
+                                                    {{ $notif['badge'] }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @empty
+                                    <div class="p-8 text-center text-slate-400">
+                                        <svg class="w-8 h-8 mx-auto mb-2 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                        <div class="text-xs font-bold text-slate-600">Tidak ada notifikasi baru</div>
+                                        <div class="text-[11px] text-slate-500 mt-0.5">Semua antrian dan pengantaran sudah tertangani.</div>
+                                    </div>
+                                @endforelse
+                            </div>
+
+                            <!-- Footer Shortcut Links -->
+                            <div class="px-4 pt-2.5 pb-1 border-t border-slate-100 flex items-center justify-between text-xs">
+                                <a href="{{ route('admin.dashboard') }}" @click="notifOpen = false" class="font-bold text-indigo-600 hover:text-indigo-800 transition">
+                                    Buka Semua Pesanan →
+                                </a>
+                                <a href="{{ route('admin.deliveries.index') }}" @click="notifOpen = false" class="text-slate-500 hover:text-slate-800 transition">
+                                    Jadwal Antar
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </header>
 
