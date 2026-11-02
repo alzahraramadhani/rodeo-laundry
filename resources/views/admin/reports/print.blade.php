@@ -401,8 +401,8 @@
                 <div>
                     <h1 class="brand-title">RODEO LAUNDRY & DRY CLEANING</h1>
                     <p class="brand-subtitle">
-                        Jl. Terusan Bendungan Sigura-gura No. 12, Lowokwaru, Kota Malang<br>
-                        WhatsApp CS: +62 857-9912-4418 | Email: cs@rodeolaundry.id
+                        Gg. Rodeo, RT.04/RW.10, Sumberejo, Kec. Batu, Kota Batu, Jawa Timur 65318<br>
+                        Buka Setiap Hari: 07.00 - 21.00 WIB | WhatsApp: +62 813-5805-5257
                     </p>
                 </div>
             </div>
@@ -542,14 +542,14 @@
             <div class="notes-box">
                 <strong>Catatan Rekapitulasi:</strong>
                 <ul>
-                    <li>Laporan ini digenerate secara otomatis oleh Sistem Informasi POS Rodeo Laundry Malang.</li>
+                    <li>Laporan ini digenerate secara otomatis oleh Sistem Informasi POS Rodeo Laundry.</li>
                     <li>Total omset hanya mengkalkulasi pesanan yang berstatus aktif (tidak dibatalkan).</li>
                     <li>Gunakan rekonsiliasi data ini sebagai acuan pembukuan kas harian/bulanan.</li>
                 </ul>
             </div>
 
             <div class="signature-box">
-                <div>Malang, {{ \Carbon\Carbon::now()->isoFormat('D MMMM Y') }}</div>
+                <div>Kota Batu, {{ \Carbon\Carbon::now()->isoFormat('D MMMM Y') }}</div>
                 <div style="font-weight: 700; margin-top: 4px;">Penanggung Jawab Outlet,</div>
                 <div class="signature-line"></div>
                 <div style="font-weight: 800; color: #1e1b4b; margin-top: 6px;">Admin Kasir Rodeo</div>

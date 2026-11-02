@@ -150,7 +150,10 @@ class AdminReportController extends Controller
             fputs($handle, "\xEF\xBB\xBF");
 
             // Header Informasi Laporan
-            fputcsv($handle, ['LAPORAN REKAPITULASI TRANSAKSI - RODEO LAUNDRY MALANG']);
+            fputcsv($handle, ['LAPORAN REKAPITULASI TRANSAKSI - RODEO LAUNDRY']);
+            fputcsv($handle, ['Alamat Outlet:', 'Gg. Rodeo, RT.04/RW.10, Sumberejo, Kec. Batu, Kota Batu, Jawa Timur 65318']);
+            fputcsv($handle, ['WhatsApp CS:', '+62 813-5805-5257']);
+            fputcsv($handle, ['Jam Operasional:', 'Buka Setiap Hari: 07.00 - 21.00 WIB']);
             fputcsv($handle, ['Periode Laporan:', $periodLabel]);
             fputcsv($handle, ['Waktu Download:', Carbon::now()->translatedFormat('d F Y, H:i') . ' WIB']);
             fputcsv($handle, ['Total Pesanan:', $orders->count() . ' Pesanan']);

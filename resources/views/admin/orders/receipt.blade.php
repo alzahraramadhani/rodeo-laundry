@@ -103,9 +103,9 @@
         <!-- Header Toko -->
         <div class="text-center">
             <h1 class="bold text-lg" style="letter-spacing: 1px;">RODEO LAUNDRY</h1>
-            <p class="text-xs">Cabang Malang • Bersih, Cepat & Wangi</p>
-            <p class="text-xs">Jl. MT Haryono No. 12, Dinoyo, Malang</p>
-            <p class="text-xs">WhatsApp: 0812-3456-7890</p>
+            <p class="text-xs">Bersih, Cepat & Wangi • Buka 07.00 - 21.00 WIB</p>
+            <p class="text-xs">Gg. Rodeo, RT.04/RW.10, Sumberejo, Kec. Batu, Kota Batu 65318</p>
+            <p class="text-xs">WhatsApp: +62 813-5805-5257</p>
         </div>
 
         <div class="double-divider"></div>

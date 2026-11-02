@@ -145,7 +145,7 @@
                         </div>
                         <div>
                             <div class="text-sm font-bold text-[#1E1B4B] leading-tight">Admin Rodeo</div>
-                            <div class="text-[11px] text-[#64748B]">Cabang Malang</div>
+                            <div class="text-[11px] text-[#64748B]">Outlet Kota Batu</div>
                         </div>
                     </div>
                     <form method="POST" action="{{ route('logout') }}">

@@ -5,7 +5,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-2xl md:text-3xl font-extrabold text-[#1E1B4B] tracking-tight">Kelola Pelanggan</h1>
-                <p class="text-sm text-[#64748B] mt-1">Daftar direktori dan data pelanggan aktif Rodeo Laundry Malang.</p>
+                <p class="text-sm text-[#64748B] mt-1">Daftar direktori dan data pelanggan aktif Rodeo Laundry.</p>
             </div>
             <button type="button"
                     @click="openAddModal()"

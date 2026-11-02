@@ -5,7 +5,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-2xl md:text-3xl font-extrabold text-[#1E1B4B] tracking-tight">Kelola Layanan</h1>
-                <p class="text-sm text-[#64748B] mt-1">Daftar layanan dan tarif laundry di Rodeo Laundry Malang</p>
+                <p class="text-sm text-[#64748B] mt-1">Daftar layanan dan tarif laundry di Rodeo Laundry</p>
             </div>
             <button type="button"
                     @click="openAddModal()"
@@ -289,7 +289,7 @@
                             </div>
                             <div>
                                 <div class="text-xs font-extrabold text-[#1E1B4B]">Status Layanan Aktif</div>
-                                <div class="text-[11px] text-[#64748B]">Langsung sinkron & tampil pada mesin POS Kasir cabang Malang</div>
+                                <div class="text-[11px] text-[#64748B]">Langsung sinkron & tampil pada mesin POS Kasir Outlet Kota Batu</div>
                             </div>
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">

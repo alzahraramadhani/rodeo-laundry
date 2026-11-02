@@ -430,7 +430,7 @@
                     }
                     const intlPhone = rawPhone.startsWith('0') ? '62' + rawPhone.substring(1) : (rawPhone.startsWith('62') ? rawPhone : '62' + rawPhone);
                     
-                    let text = `*NOTA TRANSAKSI - RODEO LAUNDRY MALANG*\n`;
+                    let text = `*NOTA TRANSAKSI - RODEO LAUNDRY*\n`;
                     text += `Pelanggan: ${this.selectedCustomer.name}\n`;
                     text += `Metode Pembayaran: ${this.paymentMethod.toUpperCase()}\n`;
                     text += `--------------------------------\n`;
@@ -439,7 +439,8 @@
                     });
                     text += `--------------------------------\n`;
                     text += `*TOTAL HARGA: Rp ${this.formatRupiah(this.totalCart)}*\n\n`;
-                    text += `Terima kasih telah mempercayakan pakaian Anda kepada Rodeo Laundry Malang! Cucian Anda segera kami proses dengan bersih dan wangi.`;
+                    text += `Terima kasih telah mempercayakan pakaian Anda kepada Rodeo Laundry!\n`;
+                    text += `📍 Gg. Rodeo, Sumberejo, Kota Batu | WA: +62 813-5805-5257`;
 
                     const url = `https://wa.me/${intlPhone}?text=${encodeURIComponent(text)}`;
                     window.open(url, '_blank');
