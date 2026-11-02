@@ -27,10 +27,11 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
         
         <!-- Card 1: Total Pesanan -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between hover:shadow-lg transition">
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Pesanan</span>
-                <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-[#4338CA] flex items-center justify-center">
+        <div class="group bg-white hover:bg-[#1E1B4B] rounded-3xl p-6 border border-slate-300/80 hover:border-[#1E1B4B] shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-[#1E1B4B]/25 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/0 group-hover:bg-white/5 pointer-events-none transition-all duration-300"></div>
+            <div class="flex items-center justify-between mb-4 relative z-10">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 group-hover:text-slate-300 transition-colors duration-300">Total Pesanan</span>
+                <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-[#4338CA] group-hover:bg-white/10 group-hover:text-[#BFF108] flex items-center justify-center transition-colors duration-300">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"/>
                         <circle cx="12" cy="12" r="3"/>
@@ -38,39 +39,39 @@
                     </svg>
                 </div>
             </div>
-            <div>
-                <div class="text-4xl font-extrabold text-[#1E1B4B] tracking-tight mb-3">
+            <div class="relative z-10">
+                <div class="text-4xl font-extrabold text-[#1E1B4B] group-hover:text-white tracking-tight mb-3 transition-colors duration-300">
                     {{ $totalOrders }}
                 </div>
                 <div>
-                    <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] text-xs font-bold">
+                    <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] group-hover:bg-[#BFF108] group-hover:text-[#1E1B4B] text-xs font-bold transition-colors duration-300 shadow-xs">
                         +14.2%
                     </span>
                 </div>
             </div>
         </div>
 
-        <!-- Card 2: Pendapatan Hari Ini (Hero Navy Card) -->
-        <div class="bg-[#1E1B4B] rounded-3xl p-6 shadow-xl shadow-[#1E1B4B]/20 flex flex-col justify-between relative overflow-hidden group">
-            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 pointer-events-none"></div>
+        <!-- Card 2: Pendapatan Hari Ini -->
+        <div class="group bg-white hover:bg-[#1E1B4B] rounded-3xl p-6 border border-slate-300/80 hover:border-[#1E1B4B] shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-[#1E1B4B]/25 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/0 group-hover:bg-white/5 pointer-events-none transition-all duration-300"></div>
             <div class="flex items-center justify-between mb-4 relative z-10">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-300">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 group-hover:text-slate-300 transition-colors duration-300">
                     {{ isset($isDateFiltered) && $isDateFiltered ? 'Pendapatan ' . \Carbon\Carbon::parse($selectedDate)->translatedFormat('d M Y') : 'Pendapatan Hari Ini' }}
                 </span>
-                <div class="w-10 h-10 rounded-2xl bg-white/10 text-[#BFF108] flex items-center justify-center">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-[#4338CA] group-hover:bg-white/10 group-hover:text-[#BFF108] flex items-center justify-center transition-colors duration-300">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                 </div>
             </div>
             <div class="relative z-10">
-                <div class="text-3xl lg:text-4xl font-extrabold text-white tracking-tight mb-3 flex items-baseline gap-1">
-                    <span class="text-[#BFF108] text-xl font-bold">Rp</span>
+                <div class="text-3xl lg:text-4xl font-extrabold text-[#1E1B4B] group-hover:text-white tracking-tight mb-3 flex items-baseline gap-1 transition-colors duration-300">
+                    <span class="text-indigo-600 group-hover:text-[#BFF108] text-xl font-bold transition-colors duration-300">Rp</span>
                     <span>{{ number_format($todayRevenue >= 1000000 ? $todayRevenue / 1000000 : $todayRevenue / 1000, 2, ',', '.') }}</span>
-                    <span class="text-[#BFF108] text-xl font-bold">{{ $todayRevenue >= 1000000 ? 'jt' : 'rb' }}</span>
+                    <span class="text-indigo-600 group-hover:text-[#BFF108] text-xl font-bold transition-colors duration-300">{{ $todayRevenue >= 1000000 ? 'jt' : 'rb' }}</span>
                 </div>
                 <div>
-                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#BFF108] text-[#1E1B4B] text-xs font-bold">
+                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] group-hover:bg-[#BFF108] group-hover:text-[#1E1B4B] text-xs font-bold transition-colors duration-300 shadow-xs">
                         ↑ +8.5%
                     </span>
                 </div>
@@ -78,21 +79,22 @@
         </div>
 
         <!-- Card 3: Order Dalam Proses -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between hover:shadow-lg transition">
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Order Dalam Proses</span>
-                <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+        <div class="group bg-white hover:bg-[#1E1B4B] rounded-3xl p-6 border border-slate-300/80 hover:border-[#1E1B4B] shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-[#1E1B4B]/25 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/0 group-hover:bg-white/5 pointer-events-none transition-all duration-300"></div>
+            <div class="flex items-center justify-between mb-4 relative z-10">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 group-hover:text-slate-300 transition-colors duration-300">Order Dalam Proses</span>
+                <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-white/10 group-hover:text-[#BFF108] flex items-center justify-center transition-colors duration-300">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
                 </div>
             </div>
-            <div>
-                <div class="text-4xl font-extrabold text-[#1E1B4B] tracking-tight mb-3">
+            <div class="relative z-10">
+                <div class="text-4xl font-extrabold text-[#1E1B4B] group-hover:text-white tracking-tight mb-3 transition-colors duration-300">
                     {{ $inProcessOrders ?? $activeCustomers }}
                 </div>
                 <div>
-                    <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] text-xs font-bold">
+                    <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] group-hover:bg-[#BFF108] group-hover:text-[#1E1B4B] text-xs font-bold transition-colors duration-300 shadow-xs">
                         {{ $inProcessOrders ?? $activeCustomers }} Aktif
                     </span>
                 </div>
@@ -100,21 +102,22 @@
         </div>
 
         <!-- Card 4: Order Selesai -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between hover:shadow-lg transition">
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Order Selesai</span>
-                <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+        <div class="group bg-white hover:bg-[#1E1B4B] rounded-3xl p-6 border border-slate-300/80 hover:border-[#1E1B4B] shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-[#1E1B4B]/25 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/0 group-hover:bg-white/5 pointer-events-none transition-all duration-300"></div>
+            <div class="flex items-center justify-between mb-4 relative z-10">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 group-hover:text-slate-300 transition-colors duration-300">Order Selesai</span>
+                <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-white/10 group-hover:text-[#BFF108] flex items-center justify-center transition-colors duration-300">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
             </div>
-            <div>
-                <div class="text-4xl font-extrabold text-[#1E1B4B] tracking-tight mb-3">
+            <div class="relative z-10">
+                <div class="text-4xl font-extrabold text-[#1E1B4B] group-hover:text-white tracking-tight mb-3 transition-colors duration-300">
                     {{ $completedOrders ?? $activeMachineQueue }}
                 </div>
                 <div>
-                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 group-hover:bg-[#BFF108] group-hover:text-[#1E1B4B] text-xs font-bold transition-colors duration-300 shadow-xs">
                         {{ $completedOrders ?? $activeMachineQueue }} Selesai
                     </span>
                 </div>
