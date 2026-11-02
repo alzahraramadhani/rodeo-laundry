@@ -140,7 +140,7 @@
 
         <!-- ================= FITUR BAR ================= -->
         <section class="max-w-[1440px] mx-auto px-4 md:px-6 pb-12 md:pb-16">
-            <div class="bg-white p-5 md:p-6 rounded-[24px] md:rounded-[32px] shadow-sm border border-[#E2E7FF]/60 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div class="bg-white p-5 md:p-6 rounded-[24px] md:rounded-[32px] shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)] border border-slate-300/80 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 
                 <!-- Fitur 1 -->
                 <div class="flex items-center gap-3.5">
@@ -239,10 +239,11 @@
                     @endphp
 
                     <a href="{{ route('pemesanan', ['service' => $service->id]) }}"
-                        class="group bg-white p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-[#E2E7FF]/70 
+                        class="group bg-white p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-slate-300/80 
                                flex flex-col justify-between 
+                               shadow-[0_4px_16px_rgba(26,23,67,0.05)]
                                transition-all duration-300 ease-out
-                               hover:border-[#BFF108] hover:shadow-xl hover:-translate-y-1.5
+                               hover:border-[#BFF108] hover:shadow-[0_16px_36px_-6px_rgba(26,23,67,0.12)] hover:-translate-y-1.5
                                cursor-pointer">
                         <div>
                             <div class="flex justify-between items-center mb-4 gap-2">

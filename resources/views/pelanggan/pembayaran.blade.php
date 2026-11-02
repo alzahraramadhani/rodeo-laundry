@@ -268,7 +268,7 @@
             </div>
 
             <!-- Stepper -->
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white p-1.5 md:p-2 rounded-full shadow-sm border border-[#E2E7FF]/60 self-start md:self-auto">
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white p-1.5 md:p-2 rounded-full shadow-sm border border-slate-300/80 self-start md:self-auto">
                 <a href="{{ route('pemesanan') }}" class="flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1.5 md:py-2 rounded-full hover:bg-[#F2F3FF] transition">
                     <span class="w-5 h-5 rounded-full bg-[#1A1743] text-white text-[10px] font-bold flex items-center justify-center shrink-0">
                         <i class="fa-solid fa-check text-[10px]"></i>
@@ -291,10 +291,10 @@
         </div>
 
         <!-- ================= MAIN CARD ================= -->
-        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 lg:p-10 shadow-sm border border-[#E2E7FF]/60">
+        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 lg:p-10 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)] border border-slate-300/80">
 
             <!-- ====== RINGKASAN PESANAN ====== -->
-            <div class="border border-[#E2E7FF] rounded-2xl md:rounded-3xl overflow-hidden mb-6 md:mb-8">
+            <div class="border border-slate-200/90 rounded-2xl md:rounded-3xl overflow-hidden mb-6 md:mb-8">
                 <button @click="summaryOpen = !summaryOpen"
                         class="w-full px-4 md:px-6 py-3.5 md:py-4 flex items-center justify-between hover:bg-[#FAF8FF] transition gap-2">
                     <div class="flex items-center gap-2 md:gap-3 min-w-0">

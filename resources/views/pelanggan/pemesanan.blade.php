@@ -194,7 +194,7 @@
             </div>
 
             <!-- Stepper -->
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white p-1.5 md:p-2 rounded-full shadow-sm border border-[#E2E7FF]/60 self-start md:self-auto">
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white p-1.5 md:p-2 rounded-full shadow-sm border border-slate-300/80 self-start md:self-auto">
                 <div class="flex items-center gap-1.5 md:gap-2 px-2.5 md:px-4 py-1.5 md:py-2 bg-[#1A1743] text-white rounded-full shadow-sm">
                     <span class="w-5 h-5 rounded-full bg-[#BFF138] text-[#131B2E] text-[11px] font-extrabold flex items-center justify-center shrink-0">1</span>
                     <span class="text-xs md:text-sm font-bold">Pilih Layanan</span>
@@ -218,7 +218,7 @@
 
                 <!-- Cuci Kiloan (Terpilih) -->
                 <template x-if="kiloan > 0 && kiloanExists">
-                    <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-sm border border-[#E2E7FF]/60">
+                    <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)] border border-slate-300/80">
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                             <div class="flex gap-3 md:gap-4">
                                 <div class="w-10 h-10 md:w-12 md:h-12 bg-[#1A1743] rounded-xl flex items-center justify-center shrink-0 text-[#BFF138]">
@@ -275,7 +275,7 @@
 
                 <!-- Layanan lain yang terpilih -->
                 <template x-for="service in selectedServices" :key="'sel-' + service.id">
-                    <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-sm border border-[#E2E7FF]/60">
+                    <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)] border border-slate-300/80">
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                             <div class="flex gap-3 md:gap-4">
                                 <div class="w-10 h-10 md:w-12 md:h-12 bg-[#1A1743] rounded-xl flex items-center justify-center shrink-0 text-[#C2F43B]">
@@ -358,8 +358,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
                 <!-- Cuci Kiloan di grid (Belum Dipilih) -->
                 <template x-if="kiloan === 0 && kiloanExists">
-                    <div class="bg-white p-4 md:p-6 rounded-[20px] md:rounded-[28px] border border-[#E2E7FF]/60 flex flex-col justify-between 
-                                hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="bg-white p-4 md:p-6 rounded-[20px] md:rounded-[28px] border border-slate-300/80 flex flex-col justify-between 
+                                shadow-[0_4px_16px_rgba(26,23,67,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(26,23,67,0.12)] hover:-translate-y-1 transition-all duration-300">
                         <div>
                             <div class="flex justify-between items-start mb-3 md:mb-4 gap-2">
                                 <div class="w-9 h-9 md:w-10 md:h-10 bg-[#1A1743] rounded-xl flex items-center justify-center shrink-0 text-[#BFF138]">
@@ -374,7 +374,7 @@
                             <h3 class="text-base md:text-lg font-bold mb-1" x-text="kiloanName"></h3>
                             <p class="text-xs md:text-sm text-[#47464E] mb-4 md:mb-5 line-clamp-2" x-text="kiloanDescription"></p>
                         </div>
-                        <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-[#E2E7FF]/60 gap-2">
+                        <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-slate-200/90 gap-2">
                             <div class="text-base md:text-lg font-extrabold shrink-0">
                                 <span x-text="formatRp(hargaKiloan)"></span>
                                 <span class="text-[10px] md:text-xs font-normal text-[#47464E]">/ kg</span>
@@ -389,8 +389,8 @@
 
                 <!-- Layanan lain -->
                 <template x-for="service in availableServices" :key="'avail-' + service.id">
-                    <div class="bg-white p-4 md:p-6 rounded-[20px] md:rounded-[28px] border border-[#E2E7FF]/60 flex flex-col justify-between 
-                                hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="bg-white p-4 md:p-6 rounded-[20px] md:rounded-[28px] border border-slate-300/80 flex flex-col justify-between 
+                                shadow-[0_4px_16px_rgba(26,23,67,0.05)] hover:shadow-[0_16px_36px_-6px_rgba(26,23,67,0.12)] hover:-translate-y-1 transition-all duration-300">
                         <div>
                             <div class="flex justify-between items-start mb-3 md:mb-4 gap-2">
                                 <div class="w-9 h-9 md:w-10 md:h-10 bg-[#1A1743] rounded-xl flex items-center justify-center shrink-0 text-[#C2F43B]">
@@ -413,7 +413,7 @@
                             <h3 class="text-base md:text-lg font-bold mb-1" x-text="service.name"></h3>
                             <p class="text-xs md:text-sm text-[#47464E] mb-4 md:mb-5 line-clamp-2" x-text="service.description"></p>
                         </div>
-                        <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-[#E2E7FF]/60 gap-2">
+                        <div class="flex justify-between items-center pt-3 md:pt-4 border-t border-slate-200/90 gap-2">
                             <div class="text-base md:text-lg font-extrabold shrink-0">
                                 <span x-text="formatRp(service.price)"></span>
                                 <span class="text-[10px] md:text-xs font-normal text-[#47464E]" x-text="'/ ' + service.unit"></span>

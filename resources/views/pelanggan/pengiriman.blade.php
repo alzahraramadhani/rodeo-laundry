@@ -201,7 +201,7 @@
             </div>
 
             <!-- Stepper -->
-            <div class="flex items-center gap-1.5 md:gap-3 bg-white p-1.5 md:p-2 rounded-full shadow-sm border border-[#E2E7FF]/60 self-start md:self-auto">
+            <div class="flex items-center gap-1.5 md:gap-3 bg-white p-1.5 md:p-2 rounded-full shadow-sm border border-slate-300/80 self-start md:self-auto">
                 <a href="{{ route('pemesanan') }}" class="flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1.5 md:py-2 rounded-full hover:bg-[#F2F3FF] transition">
                     <div class="w-5 h-5 bg-[#1A1743] rounded-full flex items-center justify-center shrink-0 text-white text-[10px]">
                         <i class="fa-solid fa-check"></i>
@@ -224,7 +224,7 @@
         </div>
 
         <!-- ================= SECTION 1: ALAMAT ================= -->
-        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-sm border border-[#E2E7FF]/60 mb-4 md:mb-6">
+        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)] border border-slate-300/80 mb-4 md:mb-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 md:gap-4 mb-4 md:mb-6">
                 <div class="flex gap-3 md:gap-4 items-start">
                     <div class="w-10 h-10 md:w-12 md:h-12 bg-[#EAEDFF] rounded-xl flex items-center justify-center shrink-0 text-[#1A1743]">
@@ -289,7 +289,7 @@
         </div>
 
         <!-- ================= SECTION 2: METODE PENJEMPUTAN ================= -->
-        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-sm border border-[#E2E7FF]/60 mb-4 md:mb-6">
+        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)] border border-slate-300/80 mb-4 md:mb-6">
             <div class="flex gap-3 md:gap-4 items-start mb-4 md:mb-6">
                 <div class="w-10 h-10 md:w-12 md:h-12 bg-[#EAEDFF] rounded-xl flex items-center justify-center shrink-0 text-[#1A1743]">
                     <i class="fa-solid fa-motorcycle text-base md:text-lg"></i>
@@ -344,7 +344,7 @@
         </div>
 
         <!-- ================= SECTION 3: METODE PENGANTARAN ================= -->
-        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-sm border border-[#E2E7FF]/60 mb-4 md:mb-6">
+        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)] border border-slate-300/80 mb-4 md:mb-6">
             <div class="flex gap-3 md:gap-4 items-start mb-4 md:mb-6">
                 <div class="w-10 h-10 md:w-12 md:h-12 bg-[#EAEDFF] rounded-xl flex items-center justify-center shrink-0 text-[#1A1743]">
                     <i class="fa-solid fa-box-open text-base md:text-lg"></i>
@@ -399,7 +399,7 @@
         </div>
 
         <!-- ================= SECTION 4: CATATAN KURIR ================= -->
-        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-sm border border-[#E2E7FF]/60 mb-12 md:mb-16">
+        <div class="bg-white rounded-[24px] md:rounded-[32px] p-4 md:p-8 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)] border border-slate-300/80 mb-12 md:mb-16">
             <div class="flex gap-3 md:gap-4 items-start mb-3 md:mb-4">
                 <div class="w-10 h-10 md:w-12 md:h-12 bg-[#EAEDFF] rounded-xl flex items-center justify-center shrink-0 text-[#1A1743]">
                     <i class="fa-solid fa-pen-to-square text-base md:text-lg"></i>
