@@ -126,10 +126,13 @@
             </a>
 
             <!-- Nav Desktop -->
-            <nav class="hidden md:flex items-center gap-1 bg-[#F2F3FF] p-1.5 rounded-full border border-slate-200/50">
-                <a href="{{ url('/') }}" class="px-4 py-1.5 text-sm font-semibold text-[#47464E] hover:text-[#1A1743] hover:bg-white hover:shadow-xs rounded-full transition-all duration-200 cursor-pointer active:scale-95">Beranda</a>
-                <a href="{{ route('pemesanan') }}" class="px-4 py-1.5 bg-[#EAEDFF] text-[#1A1743] hover:bg-white hover:shadow-xs rounded-full text-sm font-bold shadow-xs transition-all duration-200 cursor-pointer">Layanan</a>
-                <a href="{{ route('pesanan.index') }}" class="px-4 py-1.5 text-sm font-semibold text-[#47464E] hover:text-[#1A1743] hover:bg-white hover:shadow-xs rounded-full transition-all duration-200 cursor-pointer active:scale-95">Pesanan</a>
+            <nav class="hidden md:flex items-center gap-1.5 bg-[#E0E6FD] p-1.5 rounded-full border border-[#BAC7FA] shadow-inner">
+                <a href="{{ url('/') }}" class="px-4 md:px-5 py-2 text-sm font-bold text-[#1A1743] hover:text-white hover:bg-[#1A1743] hover:shadow-md rounded-full transition-all duration-200 cursor-pointer active:scale-95">Beranda</a>
+                <a href="{{ route('pemesanan') }}" class="inline-flex items-center gap-1.5 px-4 md:px-5 py-2 bg-[#1A1743] text-white rounded-full text-sm font-extrabold shadow-md ring-2 ring-[#BFF108]/50 transition-all duration-200 cursor-default">
+                    <span class="w-2 h-2 rounded-full bg-[#BFF108] shadow-[0_0_8px_#BFF108] shrink-0"></span>
+                    <span>Layanan</span>
+                </a>
+                <a href="{{ route('pesanan.index') }}" class="px-4 md:px-5 py-2 text-sm font-bold text-[#1A1743] hover:text-white hover:bg-[#1A1743] hover:shadow-md rounded-full transition-all duration-200 cursor-pointer active:scale-95">Pesanan</a>
             </nav>
 
             <!-- Right Side -->
@@ -148,9 +151,9 @@
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
                             <button type="submit" 
-                                    class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-[#47464E] bg-[#F2F3FF] hover:bg-rose-50 hover:text-rose-600 border border-slate-200/70 hover:border-rose-200 shadow-xs hover:shadow transition-all duration-200 cursor-pointer active:scale-95" 
+                                    class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-extrabold text-slate-700 bg-white hover:bg-rose-600 hover:text-white hover:border-rose-600 border border-slate-300 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer active:scale-95" 
                                     title="Keluar dari akun">
-                                <i class="fa-solid fa-arrow-right-from-bracket text-[11px] opacity-75"></i>
+                                <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i>
                                 <span>Keluar</span>
                             </button>
                         </form>
