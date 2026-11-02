@@ -37,27 +37,30 @@
             </a>
 
             <!-- Nav Desktop -->
-            <nav class="hidden md:flex items-center gap-1 bg-[#F2F3FF] p-1.5 rounded-full">
-                <a href="{{ url('/') }}" class="px-4 py-1.5 bg-[#EAEDFF] rounded-full text-sm font-bold text-[#1A1743]">Beranda</a>
-                <a href="{{ route('pemesanan') }}" class="px-4 py-1.5 text-sm font-semibold text-[#47464E] hover:text-[#1A1743] rounded-full transition">Layanan</a>
-                <a href="{{ route('pesanan.index') }}" class="px-4 py-1.5 text-sm font-semibold text-[#47464E] hover:text-[#1A1743] rounded-full transition">Pesanan</a>
+            <nav class="hidden md:flex items-center gap-1 bg-[#F2F3FF] p-1.5 rounded-full border border-slate-200/50">
+                <a href="{{ url('/') }}" class="px-4 py-1.5 bg-[#EAEDFF] text-[#1A1743] hover:bg-white hover:shadow-xs rounded-full text-sm font-bold shadow-xs transition-all duration-200 cursor-pointer">Beranda</a>
+                <a href="{{ route('pemesanan') }}" class="px-4 py-1.5 text-sm font-semibold text-[#47464E] hover:text-[#1A1743] hover:bg-white hover:shadow-xs rounded-full transition-all duration-200 cursor-pointer active:scale-95">Layanan</a>
+                <a href="{{ route('pesanan.index') }}" class="px-4 py-1.5 text-sm font-semibold text-[#47464E] hover:text-[#1A1743] hover:bg-white hover:shadow-xs rounded-full transition-all duration-200 cursor-pointer active:scale-95">Pesanan</a>
             </nav>
 
             <!-- Right Side -->
             <div class="flex items-center gap-2 md:gap-3">
-                <a href="https://wa.me/6281358055257" target="_blank" class="hidden sm:flex items-center gap-2 px-3 md:px-4 py-2 bg-[#EAEDFF] hover:bg-[#dfe4ff] rounded-full text-xs md:text-sm font-semibold text-[#131B2E] transition">
+                <a href="https://wa.me/6281358055257" target="_blank" class="hidden sm:flex items-center gap-2 px-3 md:px-4 py-2 bg-[#EAEDFF] hover:bg-[#dfe4ff] hover:shadow-xs active:scale-95 rounded-full text-xs md:text-sm font-semibold text-[#131B2E] transition-all duration-200">
                     <i class="fa-brands fa-whatsapp text-sm md:text-base text-[#25D366]"></i> WhatsApp
                 </a>
 
                 @auth
                     <div class="flex items-center gap-2">
-                        <a href="{{ route('profile.edit') }}" class="w-8 h-8 md:w-9 md:h-9 bg-[#1A1743] hover:bg-[#2F2D59] text-white rounded-full flex items-center justify-center transition shadow-sm shrink-0" title="{{ Auth::user()->username }}">
+                        <a href="{{ route('profile.edit') }}" class="w-8 h-8 md:w-9 md:h-9 bg-[#1A1743] hover:bg-[#2F2D59] hover:scale-105 active:scale-95 text-white rounded-full flex items-center justify-center transition shadow-sm shrink-0" title="{{ Auth::user()->username }}">
                             <i class="fa-regular fa-user text-xs md:text-sm"></i>
                         </a>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
-                            <button type="submit" class="text-xs text-[#47464E] hover:text-[#1A1743] font-medium hidden sm:inline px-2 py-1" title="Keluar">
-                                Keluar
+                            <button type="submit" 
+                                    class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-[#47464E] bg-[#F2F3FF] hover:bg-rose-50 hover:text-rose-600 border border-slate-200/70 hover:border-rose-200 shadow-xs hover:shadow transition-all duration-200 cursor-pointer active:scale-95" 
+                                    title="Keluar dari akun">
+                                <i class="fa-solid fa-arrow-right-from-bracket text-[11px] opacity-75"></i>
+                                <span>Keluar</span>
                             </button>
                         </form>
                     </div>

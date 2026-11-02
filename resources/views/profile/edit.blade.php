@@ -28,8 +28,11 @@
                 <a href="{{ url('/') }}" class="text-sm font-bold text-[#1A1743] hover:underline hidden sm:block">Kembali ke Beranda</a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
-                    <button type="submit" class="px-3 py-1.5 rounded-full bg-[#1A1743] hover:bg-[#2F2D59] text-white text-xs font-semibold shadow-sm transition" title="Keluar">
-                        Keluar
+                    <button type="submit" 
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-[#47464E] bg-[#F2F3FF] hover:bg-rose-50 hover:text-rose-600 border border-slate-200/70 hover:border-rose-200 shadow-xs hover:shadow transition-all duration-200 cursor-pointer active:scale-95" 
+                            title="Keluar dari akun">
+                        <i class="fa-solid fa-arrow-right-from-bracket text-[11px] opacity-75"></i>
+                        <span>Keluar</span>
                     </button>
                 </form>
             </div>
