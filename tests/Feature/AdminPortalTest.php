@@ -282,5 +282,52 @@ class AdminPortalTest extends TestCase
         $response->assertSee('Order Dalam Proses');
         $response->assertSee('Order Selesai');
     }
+
+    public function test_admin_can_view_print_report(): void
+    {
+        $customer = Customer::create([
+            'name'    => 'Ahmad Dhani',
+            'phone'   => '081299988877',
+            'city'    => 'Kota Malang',
+            'address' => 'Jl. Kalpataru',
+        ]);
+
+        $order = Order::create([
+            'customer_id' => $customer->id,
+            'total_price' => 75000,
+            'status'      => 'completed',
+        ]);
+
+        $response = $this->actingAs($this->admin)->get('/admin/reports/print?period=today');
+        $response->assertStatus(200);
+        $response->assertSee('REKAPITULASI TRANSAKSI');
+        $response->assertSee('Ahmad Dhani');
+        $response->assertSee('75.000');
+    }
+
+    public function test_admin_can_export_report_csv(): void
+    {
+        $customer = Customer::create([
+            'name'    => 'Rahmat Hidayat',
+            'phone'   => '081233344455',
+            'city'    => 'Kota Malang',
+            'address' => 'Jl. Suhat',
+        ]);
+
+        $order = Order::create([
+            'customer_id' => $customer->id,
+            'total_price' => 50000,
+            'status'      => 'ready',
+        ]);
+
+        $response = $this->actingAs($this->admin)->get('/admin/reports/export?period=week');
+        $response->assertStatus(200);
+        $response->assertHeader('content-type', 'text/csv; charset=UTF-8');
+        
+        $content = $response->streamedContent();
+        $this->assertStringContainsString('LAPORAN REKAPITULASI TRANSAKSI', $content);
+        $this->assertStringContainsString('Rahmat Hidayat', $content);
+        $this->assertStringContainsString('#RD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT), $content);
+    }
 }
 

@@ -178,6 +178,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::patch('/orders/{order}/status', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'updateOrderStatus'])->name('orders.updateStatus');
     Route::get('/orders/{order}/receipt', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'printReceipt'])->name('orders.receipt');
 
+    // Laporan & Rekapitulasi Transaksi (Print PDF & Export CSV)
+    Route::get('/reports/print', [\App\Http\Controllers\Admin\AdminReportController::class, 'print'])->name('reports.print');
+    Route::get('/reports/export', [\App\Http\Controllers\Admin\AdminReportController::class, 'export'])->name('reports.export');
+
     // 2. POS / Kasir
     Route::get('/pos', [\App\Http\Controllers\Admin\PosController::class, 'index'])->name('pos');
     Route::post('/pos/order', [\App\Http\Controllers\Admin\PosController::class, 'storeOrder'])->name('pos.order');

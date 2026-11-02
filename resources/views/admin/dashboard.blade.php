@@ -1,4 +1,5 @@
 <x-admin-layout title="Dashboard">
+<div x-data="reportModalManager()" class="relative">
     <!-- Header Section -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
@@ -11,13 +12,14 @@
         </div>
 
         <div>
-            <a href="javascript:window.print()"
-               class="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-slate-50 text-[#1E1B4B] border border-slate-300/80 rounded-full text-xs md:text-sm font-bold shadow-xs transition">
+            <button type="button"
+                    @click="showModal = true"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-slate-50 text-[#1E1B4B] border border-slate-300/80 rounded-full text-xs md:text-sm font-bold shadow-xs transition cursor-pointer">
                 <svg class="w-4 h-4 text-[#4338CA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                 </svg>
                 <span>Unduh Laporan</span>
-            </a>
+            </button>
         </div>
     </div>
 
@@ -156,13 +158,14 @@
                     </select>
                 </form>
 
-                <a href="javascript:window.print()" 
-                   class="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-300/80 rounded-full text-xs font-bold text-slate-800 shadow-xs transition">
+                <button type="button"
+                        @click="showModal = true"
+                        class="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-300/80 rounded-full text-xs font-bold text-slate-800 shadow-xs transition cursor-pointer">
                     <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                     </svg>
                     <span>Export Rekap</span>
-                </a>
+                </button>
             </div>
         </div>
 
@@ -306,4 +309,218 @@
             </div>
         </div>
     </div>
+
+    <!-- ================= MODAL UNDUH & EXPORT LAPORAN ================= -->
+    <div x-show="showModal"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+         style="display: none;">
+        
+        <div @click.away="showModal = false"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-lg w-full p-6 md:p-8 space-y-5 text-left">
+            
+            <!-- Header Modal -->
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-[#1E1B4B]">
+                        <svg class="w-5 h-5 text-[#4338CA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-extrabold text-[#1E1B4B]">Unduh Laporan & Rekap</h3>
+                        <p class="text-xs text-slate-500">Pilih periode dan format unduhan laporan transaksi.</p>
+                    </div>
+                </div>
+                <button type="button" @click="showModal = false" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Periode Selection Buttons Grid -->
+            <div class="space-y-2">
+                <label class="text-xs font-bold text-[#1E1B4B] uppercase tracking-wider">1. Pilih Periode Waktu</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <button type="button"
+                            @click="period = 'today'"
+                            :class="period === 'today' ? 'bg-[#1E1B4B] text-white border-[#1E1B4B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'"
+                            class="px-3 py-2 rounded-xl border text-xs font-bold transition text-center flex items-center justify-center gap-1.5">
+                        <span>⚡ Hari Ini</span>
+                    </button>
+
+                    <button type="button"
+                            @click="period = 'date'"
+                            :class="period === 'date' ? 'bg-[#1E1B4B] text-white border-[#1E1B4B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'"
+                            class="px-3 py-2 rounded-xl border text-xs font-bold transition text-center flex items-center justify-center gap-1.5">
+                        <span>📅 Per Tanggal</span>
+                    </button>
+
+                    <button type="button"
+                            @click="period = 'week'"
+                            :class="period === 'week' ? 'bg-[#1E1B4B] text-white border-[#1E1B4B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'"
+                            class="px-3 py-2 rounded-xl border text-xs font-bold transition text-center flex items-center justify-center gap-1.5">
+                        <span>🗓️ 1 Minggu</span>
+                    </button>
+
+                    <button type="button"
+                            @click="period = 'month'"
+                            :class="period === 'month' ? 'bg-[#1E1B4B] text-white border-[#1E1B4B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'"
+                            class="px-3 py-2 rounded-xl border text-xs font-bold transition text-center flex items-center justify-center gap-1.5">
+                        <span>📆 30 Hari</span>
+                    </button>
+
+                    <button type="button"
+                            @click="period = 'this_month'"
+                            :class="period === 'this_month' ? 'bg-[#1E1B4B] text-white border-[#1E1B4B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'"
+                            class="px-3 py-2 rounded-xl border text-xs font-bold transition text-center flex items-center justify-center gap-1.5">
+                        <span>📊 Bulan Ini</span>
+                    </button>
+
+                    <button type="button"
+                            @click="period = 'custom'"
+                            :class="period === 'custom' ? 'bg-[#1E1B4B] text-white border-[#1E1B4B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'"
+                            class="px-3 py-2 rounded-xl border text-xs font-bold transition text-center flex items-center justify-center gap-1.5">
+                        <span>🎯 Kustom</span>
+                    </button>
+
+                    <button type="button"
+                            @click="period = 'all'"
+                            :class="period === 'all' ? 'bg-[#1E1B4B] text-white border-[#1E1B4B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'"
+                            class="px-3 py-2 rounded-xl border text-xs font-bold transition text-center flex items-center justify-center gap-1.5 col-span-2 sm:col-span-3">
+                        <span>🌐 Semua Waktu (Rekap Total)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Date Picker Inputs -->
+            <div x-show="period === 'date'" class="p-3.5 bg-indigo-50/70 border border-indigo-200/80 rounded-2xl space-y-1.5">
+                <label class="text-xs font-bold text-[#1E1B4B]">Pilih Tanggal Transaksi:</label>
+                <input type="date"
+                       x-model="date"
+                       class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-[#1E1B4B]">
+            </div>
+
+            <div x-show="period === 'custom'" class="p-3.5 bg-indigo-50/70 border border-indigo-200/80 rounded-2xl space-y-2">
+                <label class="text-xs font-bold text-[#1E1B4B]">Rentang Tanggal:</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <span class="text-[11px] text-slate-500 font-semibold block mb-1">Dari Tanggal:</span>
+                        <input type="date"
+                               x-model="startDate"
+                               class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-[#1E1B4B]">
+                    </div>
+                    <div>
+                        <span class="text-[11px] text-slate-500 font-semibold block mb-1">Sampai Tanggal:</span>
+                        <input type="date"
+                               x-model="endDate"
+                               class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 focus:outline-none focus:border-[#1E1B4B]">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Filter -->
+            <div class="space-y-1.5">
+                <label class="text-xs font-bold text-[#1E1B4B] uppercase tracking-wider">2. Filter Status Pesanan</label>
+                <select x-model="status"
+                        class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B]">
+                    <option value="all">Semua Status Pesanan</option>
+                    <option value="completed">Selesai</option>
+                    <option value="ready">Siap Diambil</option>
+                    <option value="processing">Sedang Dicuci</option>
+                    <option value="pending">Antrian Masuk</option>
+                    <option value="cancelled">Dibatalkan</option>
+                </select>
+            </div>
+
+            <!-- Informational Note -->
+            <div class="flex items-start gap-2.5 p-3 bg-slate-50 border border-slate-200/80 rounded-2xl text-[11px] text-slate-600">
+                <svg class="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Dokumen laporan diekspor secara utuh sesuai filter waktu (tidak terpotong paginasi 10 item) dan bebas dari elemen menu samping / tombol navigasi.</span>
+            </div>
+
+            <!-- Action Buttons Footer -->
+            <div class="pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2.5">
+                <button type="button"
+                        @click="showModal = false"
+                        class="px-4 py-2.5 rounded-2xl text-xs font-bold text-slate-500 hover:bg-slate-100 transition text-center">
+                    Batal
+                </button>
+
+                <button type="button"
+                        @click="openExport()"
+                        class="px-4 py-2.5 rounded-2xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 text-xs font-bold shadow-xs transition flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    <span>Download Excel (CSV)</span>
+                </button>
+
+                <button type="button"
+                        @click="openPrint()"
+                        class="px-5 py-2.5 rounded-2xl bg-[#1E1B4B] hover:bg-[#2A2663] text-white text-xs font-bold shadow-md transition flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 text-[#BFF108]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                    <span>Cetak / Simpan PDF</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function reportModalManager() {
+        return {
+            showModal: false,
+            period: '{{ request('date') ? 'date' : 'today' }}',
+            date: '{{ request('date', date('Y-m-d')) }}',
+            startDate: '{{ date('Y-m-d', strtotime('-7 days')) }}',
+            endDate: '{{ date('Y-m-d') }}',
+            status: '{{ request('status', 'all') }}',
+            search: '{{ request('search', '') }}',
+
+            get printUrl() {
+                const params = new URLSearchParams({
+                    period: this.period,
+                    date: this.date,
+                    start_date: this.startDate,
+                    end_date: this.endDate,
+                    status: this.status,
+                    search: this.search
+                });
+                return '{{ route('admin.reports.print') }}?' + params.toString();
+            },
+
+            get exportUrl() {
+                const params = new URLSearchParams({
+                    period: this.period,
+                    date: this.date,
+                    start_date: this.startDate,
+                    end_date: this.endDate,
+                    status: this.status,
+                    search: this.search
+                });
+                return '{{ route('admin.reports.export') }}?' + params.toString();
+            },
+
+            openPrint() {
+                window.open(this.printUrl, '_blank');
+                this.showModal = false;
+            },
+
+            openExport() {
+                window.location.href = this.exportUrl;
+                this.showModal = false;
+            }
+        };
+    }
+</script>
 </x-admin-layout>
