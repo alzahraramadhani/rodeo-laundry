@@ -110,12 +110,17 @@
                                 $tag = 'Kemasan Vakum Kedap';
                             }
                         @endphp
-                        <div class="bg-white rounded-3xl p-5 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between hover:shadow-lg hover:border-[#1E1B4B]/30 transition group">
-                            <div>
+                        <div class="group bg-white hover:bg-[#1E1B4B] rounded-3xl p-5 border border-slate-300/80 hover:border-[#1E1B4B] shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-[#1E1B4B]/25 flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                             @click="addToCart({{ $srv->id }}, '{{ addslashes($srv->name) }}', {{ (float)$srv->price }}, '{{ $unit }}')">
+                            
+                            <!-- Subtle glow bubble on bottom-right corner -->
+                            <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/0 group-hover:bg-white/5 pointer-events-none transition-all duration-300"></div>
+
+                            <div class="relative z-10">
                                 <!-- Top row: Icon + Title & Price -->
                                 <div class="flex items-start justify-between gap-3">
                                     <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-2xl bg-indigo-50 border border-indigo-100/80 flex items-center justify-center text-[#1E1B4B] group-hover:bg-[#1E1B4B] group-hover:text-[#BFF108] transition">
+                                        <div class="w-10 h-10 rounded-2xl bg-indigo-50 border border-indigo-100/80 group-hover:border-white/10 flex items-center justify-center text-[#1E1B4B] group-hover:bg-white/10 group-hover:text-[#BFF108] transition-colors duration-300">
                                             @if(str_contains($sName, 'sepatu'))
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
                                             @elseif(str_contains($sName, 'setrika'))
@@ -125,24 +130,24 @@
                                             @endif
                                         </div>
                                         <div>
-                                            <h3 class="text-base font-bold text-[#1E1B4B]">{{ $srv->name }}</h3>
-                                            <span class="text-xs text-slate-500 font-medium">⏱ {{ $duration }}</span>
+                                            <h3 class="text-base font-bold text-[#1E1B4B] group-hover:text-white transition-colors duration-300">{{ $srv->name }}</h3>
+                                            <span class="text-xs text-slate-500 group-hover:text-slate-300 font-medium transition-colors duration-300">⏱ {{ $duration }}</span>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <div class="text-base font-extrabold text-[#1E1B4B]">Rp {{ number_format($srv->price, 0, ',', '.') }}</div>
-                                        <div class="text-[11px] text-slate-500 font-medium">/{{ $unit }}</div>
+                                        <div class="text-base font-extrabold text-[#1E1B4B] group-hover:text-[#BFF108] transition-colors duration-300">Rp {{ number_format($srv->price, 0, ',', '.') }}</div>
+                                        <div class="text-[11px] text-slate-500 group-hover:text-slate-300 font-medium transition-colors duration-300">/{{ $unit }}</div>
                                     </div>
                                 </div>
 
-                                <p class="text-xs text-[#64748B] mt-3 line-clamp-2">{{ $srv->description ?? 'Pencucian higienis dengan pewangi premium Rodeo.' }}</p>
+                                <p class="text-xs text-[#64748B] group-hover:text-slate-300 mt-3 line-clamp-2 transition-colors duration-300">{{ $srv->description ?? 'Pencucian higienis dengan pewangi premium Rodeo.' }}</p>
                             </div>
 
-                            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between">
-                                <span class="text-[11px] font-semibold text-[#1E1B4B]/70">{{ $tag }}</span>
+                            <div class="mt-4 pt-3 border-t border-slate-200/80 group-hover:border-white/10 flex items-center justify-between relative z-10 transition-colors duration-300">
+                                <span class="text-[11px] font-semibold text-[#1E1B4B]/70 group-hover:text-slate-300 transition-colors duration-300">{{ $tag }}</span>
                                 <button type="button"
-                                        @click="addToCart({{ $srv->id }}, '{{ addslashes($srv->name) }}', {{ (float)$srv->price }}, '{{ $unit }}')"
-                                        class="px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200/80 hover:bg-[#1E1B4B] text-[#1E1B4B] hover:text-[#BFF108] hover:border-[#1E1B4B] text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                                        @click.stop="addToCart({{ $srv->id }}, '{{ addslashes($srv->name) }}', {{ (float)$srv->price }}, '{{ $unit }}')"
+                                        class="px-4 py-1.5 rounded-full bg-slate-100 group-hover:bg-[#BFF108] border border-slate-200/80 group-hover:border-[#BFF108] text-[#1E1B4B] text-xs font-bold transition-all duration-300 flex items-center gap-1.5 shadow-sm">
                                     <span>+ Tambah</span>
                                 </button>
                             </div>
