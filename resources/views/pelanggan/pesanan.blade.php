@@ -23,7 +23,7 @@
         };
     </script>
 </head>
-<body class="bg-[#F4F5FA] text-[#1A1743] font-sans antialiased min-h-screen flex flex-col justify-between"
+<body class="bg-[#EEF1F8] text-[#1A1743] font-sans antialiased min-h-screen flex flex-col justify-between"
       x-data="{
         orders: window.pesananData.orders || [],
         get hasOrders() { return this.orders.length > 0; },
@@ -173,11 +173,11 @@
             </template>
 
             <template x-for="order in orders" :key="order.id">
-                <div class="bg-white rounded-[24px] md:rounded-[28px] border border-slate-200/90 overflow-hidden shadow-[0_4px_20px_rgba(26,23,67,0.04)]
-                            transition-all duration-300 hover:shadow-[0_15px_40px_-12px_rgba(26,23,67,0.12)]">
+                <div class="bg-white rounded-[24px] md:rounded-[28px] border border-slate-300/80 overflow-hidden shadow-[0_10px_30px_-5px_rgba(26,23,67,0.08),0_4px_12px_rgba(0,0,0,0.03)]
+                            transition-all duration-300 hover:shadow-[0_20px_45px_-12px_rgba(26,23,67,0.16)] hover:-translate-y-0.5">
 
                     <!-- Header Kartu -->
-                    <div class="px-4 md:px-8 pt-5 md:pt-6 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#E2E7FF]/60">
+                    <div class="px-4 md:px-8 pt-5 md:pt-6 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-slate-50/70 border-b border-slate-200/80">
                         <div class="flex items-center gap-3 flex-wrap">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-receipt text-[#1A1743]"></i>
@@ -211,7 +211,7 @@
 
                     <!-- Progress Bar -->
                     <template x-if="order.status !== 'cancelled'">
-                        <div class="px-4 md:px-8 py-5 bg-[#FAF8FF]">
+                        <div class="px-4 md:px-8 py-5 bg-[#F8FAFC] border-b border-slate-100">
                             <div class="flex items-center justify-between relative">
                                 <div class="absolute top-3 left-3 right-3 h-0.5 bg-[#E2E7FF]"></div>
                                 <div class="absolute top-3 left-3 h-0.5 bg-[#BFF138] transition-all duration-500"
@@ -300,7 +300,7 @@
                     </div>
 
                     <!-- Footer Kartu -->
-                    <div class="px-4 md:px-8 py-4 bg-[#FAF8FF] border-t border-[#E2E7FF]/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="px-4 md:px-8 py-4 bg-slate-50/80 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div>
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] md:text-xs text-[#47464E]">Total Pembayaran</span>
