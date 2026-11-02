@@ -11,7 +11,7 @@ class ServiceTypeController extends Controller
     {
         return [
             'name' => 'required|string|max:100',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0|max:999999999999',
             'description' => 'nullable|string',
         ];
     }

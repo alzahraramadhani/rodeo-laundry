@@ -12,7 +12,7 @@
 
         <div>
             <a href="javascript:window.print()"
-               class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#1E1B4B] rounded-full text-xs md:text-sm font-bold shadow-sm transition">
+               class="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-slate-50 text-[#1E1B4B] border border-slate-300/80 rounded-full text-xs md:text-sm font-bold shadow-xs transition">
                 <svg class="w-4 h-4 text-[#4338CA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                 </svg>
@@ -25,10 +25,10 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
         
         <!-- Card 1: Total Pesanan -->
-        <div class="bg-white rounded-3xl p-6 border border-[#E9ECF4] shadow-sm flex flex-col justify-between hover:shadow-md transition">
+        <div class="bg-white rounded-3xl p-6 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between hover:shadow-lg transition">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Total Pesanan</span>
-                <div class="w-10 h-10 rounded-2xl bg-[#EEF2FF] text-[#4338CA] flex items-center justify-center">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Total Pesanan</span>
+                <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-[#4338CA] flex items-center justify-center">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"/>
                         <circle cx="12" cy="12" r="3"/>
@@ -41,7 +41,7 @@
                     {{ $totalOrders }}
                 </div>
                 <div>
-                    <span class="inline-block px-3 py-1 rounded-full bg-[#F1F3FA] text-[#1E1B4B] text-xs font-bold">
+                    <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] text-xs font-bold">
                         +14.2%
                     </span>
                 </div>
@@ -49,10 +49,10 @@
         </div>
 
         <!-- Card 2: Pendapatan Hari Ini (Hero Navy Card) -->
-        <div class="bg-[#1E1B4B] rounded-3xl p-6 shadow-xl flex flex-col justify-between relative overflow-hidden group">
+        <div class="bg-[#1E1B4B] rounded-3xl p-6 shadow-xl shadow-[#1E1B4B]/20 flex flex-col justify-between relative overflow-hidden group">
             <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 pointer-events-none"></div>
             <div class="flex items-center justify-between mb-4 relative z-10">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-300">
                     {{ isset($isDateFiltered) && $isDateFiltered ? 'Pendapatan ' . \Carbon\Carbon::parse($selectedDate)->translatedFormat('d M Y') : 'Pendapatan Hari Ini' }}
                 </span>
                 <div class="w-10 h-10 rounded-2xl bg-white/10 text-[#BFF108] flex items-center justify-center">
@@ -76,10 +76,10 @@
         </div>
 
         <!-- Card 3: Order Dalam Proses -->
-        <div class="bg-white rounded-3xl p-6 border border-[#E9ECF4] shadow-sm flex flex-col justify-between hover:shadow-md transition">
+        <div class="bg-white rounded-3xl p-6 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between hover:shadow-lg transition">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Order Dalam Proses</span>
-                <div class="w-10 h-10 rounded-2xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Order Dalam Proses</span>
+                <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
@@ -90,7 +90,7 @@
                     {{ $inProcessOrders ?? $activeCustomers }}
                 </div>
                 <div>
-                    <span class="inline-block px-3 py-1 rounded-full bg-[#F1F3FA] text-[#1E1B4B] text-xs font-bold">
+                    <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] text-xs font-bold">
                         {{ $inProcessOrders ?? $activeCustomers }} Aktif
                     </span>
                 </div>
@@ -98,10 +98,10 @@
         </div>
 
         <!-- Card 4: Order Selesai -->
-        <div class="bg-white rounded-3xl p-6 border border-[#E9ECF4] shadow-sm flex flex-col justify-between hover:shadow-md transition">
+        <div class="bg-white rounded-3xl p-6 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between hover:shadow-lg transition">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Order Selesai</span>
-                <div class="w-10 h-10 rounded-2xl bg-[#ECFDF5] text-[#10B981] flex items-center justify-center">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Order Selesai</span>
+                <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
@@ -112,7 +112,7 @@
                     {{ $completedOrders ?? $activeMachineQueue }}
                 </div>
                 <div>
-                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#D1FAE5] text-[#065F46] text-xs font-bold">
+                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
                         {{ $completedOrders ?? $activeMachineQueue }} Selesai
                     </span>
                 </div>
@@ -121,14 +121,14 @@
     </div>
 
     @if(session('success'))
-    <div class="mb-4 px-5 py-3 bg-[#ECFDF5] border border-[#6EE7B7] rounded-2xl text-[#065F46] text-sm font-semibold flex items-center gap-2">
-        <svg class="w-4 h-4 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <div class="mb-4 px-5 py-3 bg-emerald-50 border border-emerald-300 rounded-2xl text-emerald-800 text-sm font-semibold flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
         {{ session('success') }}
     </div>
     @endif
 
     <!-- Main Section: Pesanan Terbaru Table -->
-    <div class="bg-white rounded-[32px] p-6 md:p-8 border border-[#E9ECF4] shadow-sm">
+    <div class="bg-white rounded-[32px] p-6 md:p-8 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)]">
         
         <!-- Table Top Actions -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -146,7 +146,7 @@
                 <form method="GET" action="{{ route('admin.dashboard') }}" class="flex items-center">
                     <select name="status" 
                             onchange="this.form.submit()" 
-                            class="px-4 py-2 bg-[#F8F9FD] border border-[#E9ECF4] rounded-full text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] cursor-pointer shadow-sm">
+                            class="px-4 py-2 bg-slate-50 border border-slate-300/80 rounded-full text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] cursor-pointer shadow-xs">
                         <option value="all" {{ request('status') == 'all' || !request('status') ? 'selected' : '' }}>Semua Status</option>
                         <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Antrian Masuk</option>
                         <option value="processing" {{ request('status') == 'processing' ? 'selected' : '' }}>Sedang Dicuci</option>
@@ -157,8 +157,8 @@
                 </form>
 
                 <a href="javascript:window.print()" 
-                   class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#F8F9FD] hover:bg-[#EEF1FA] border border-[#E9ECF4] rounded-full text-xs font-bold text-[#1E1B4B] shadow-sm transition">
-                    <svg class="w-3.5 h-3.5 text-[#64748B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   class="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-300/80 rounded-full text-xs font-bold text-slate-800 shadow-xs transition">
+                    <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                     </svg>
                     <span>Export Rekap</span>
@@ -170,7 +170,7 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">
                 <thead>
-                    <tr class="text-[11px] font-extrabold uppercase tracking-wider text-[#64748B] bg-[#F8F9FD] border-y border-[#EEF1F6]">
+                    <tr class="text-[11px] font-extrabold uppercase tracking-wider text-slate-600 bg-slate-100/90 border-y border-slate-200/80">
                         <th class="py-3.5 px-4 rounded-l-2xl">ID & WAKTU</th>
                         <th class="py-3.5 px-4">PELANGGAN</th>
                         <th class="py-3.5 px-4">LAYANAN</th>
@@ -179,9 +179,9 @@
                         <th class="py-3.5 px-4 text-center rounded-r-2xl">AKSI</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-[#F1F3F8]">
+                <tbody class="divide-y divide-slate-200/80">
                     @forelse($recentOrders as $order)
-                        <tr class="hover:bg-[#FBFBFE] transition">
+                        <tr class="hover:bg-indigo-50/40 transition">
                             <!-- ID & Waktu -->
                             <td class="py-4 px-4">
                                 <div class="font-extrabold text-[#1E1B4B]">

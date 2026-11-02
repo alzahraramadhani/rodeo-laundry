@@ -50,7 +50,7 @@ class AdminServiceController extends Controller
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:100',
-            'price'       => 'required|numeric|min:0',
+            'price'       => 'required|numeric|min:0|max:999999999999',
             'description' => 'nullable|string|max:255',
         ]);
 
@@ -63,7 +63,7 @@ class AdminServiceController extends Controller
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:100',
-            'price'       => 'required|numeric|min:0',
+            'price'       => 'required|numeric|min:0|max:999999999999',
             'description' => 'nullable|string|max:255',
         ]);
 

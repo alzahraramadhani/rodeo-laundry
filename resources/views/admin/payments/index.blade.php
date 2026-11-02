@@ -18,11 +18,11 @@
         </div>
 
         <!-- ================= SEARCH & FILTER CONTROLS ================= -->
-        <div class="bg-white rounded-3xl p-4 border border-[#E9ECF4] shadow-sm">
+        <div class="bg-white rounded-3xl p-5 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)]">
             <form method="GET" action="{{ route('admin.payments.index') }}" class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
                 <!-- Search text -->
                 <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
@@ -31,19 +31,19 @@
                            name="search"
                            value="{{ request('search') }}"
                            placeholder="Cari nota, nama pelanggan..."
-                           class="w-full pl-10 pr-4 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-sm text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] focus:ring-1 focus:ring-[#1E1B4B] transition">
+                           class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                 </div>
 
                 <!-- Filter Status -->
                 <div class="relative min-w-[180px]">
                     <select name="status"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 pl-4 pr-10 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
+                            class="w-full py-2.5 pl-4 pr-10 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
                         <option value="all" {{ request('status') == 'all' || !request('status') ? 'selected' : '' }}>Semua Status</option>
                         <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Lunas</option>
                         <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Belum Lunas</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
@@ -54,13 +54,13 @@
                 <div class="relative min-w-[160px]">
                     <select name="sort"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 pl-4 pr-10 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
+                            class="w-full py-2.5 pl-4 pr-10 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
                         <option value="latest" {{ request('sort') == 'latest' || !request('sort') ? 'selected' : '' }}>Urutan: Terkini</option>
                         <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Urutan: Terlama</option>
                         <option value="amount_desc" {{ request('sort') == 'amount_desc' ? 'selected' : '' }}>Nominal Tertinggi</option>
                         <option value="amount_asc" {{ request('sort') == 'amount_asc' ? 'selected' : '' }}>Nominal Terendah</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
                         </svg>
@@ -70,11 +70,11 @@
         </div>
 
         <!-- ================= DATA TABLE ================= -->
-        <div class="bg-white rounded-3xl border border-[#E9ECF4] shadow-sm overflow-hidden">
+        <div class="bg-white rounded-3xl border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-[#565476] text-white text-[11px] font-extrabold tracking-wider uppercase">
+                        <tr class="bg-[#1E1B4B] text-white text-[11px] font-extrabold tracking-wider uppercase">
                             <th class="py-4 px-6 rounded-tl-2xl w-24">ID</th>
                             <th class="py-4 px-6">Nama Pelanggan</th>
                             <th class="py-4 px-6">Jenis Layanan</th>
@@ -84,7 +84,7 @@
                             <th class="py-4 px-6 text-center rounded-tr-2xl w-28">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-[#F0F2F8] text-xs">
+                    <tbody class="divide-y divide-slate-200/80 text-xs">
                         @forelse($payments as $item)
                             @php
                                 $customerName = $item->order->customer->name ?? 'Pelanggan Walk-in';
@@ -95,7 +95,7 @@
                                 $unit = str_contains(strtolower($serviceName), 'kiloan') ? 'kg' : 'pcs';
                                 $isPaid = $item->status === 'completed';
                             @endphp
-                            <tr class="hover:bg-[#F8F9FD]/80 transition">
+                            <tr class="hover:bg-indigo-50/40 transition">
                                 <td class="py-4 px-6 font-extrabold text-[#1E1B4B] text-sm">
                                     #RD-{{ 8900 + ($item->order_id ?? $item->id) }}
                                 </td>
@@ -175,7 +175,7 @@
             </div>
 
             <!-- Footer Pagination -->
-            <div class="p-5 border-t border-[#F0F2F8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
+            <div class="p-5 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
                 <div>
                     Menampilkan <span class="font-bold text-[#1E1B4B]">{{ $payments->count() }}</span> dari <span class="font-bold text-[#1E1B4B]">{{ $totalPayments }}</span> transaksi pembayaran aktif
                 </div>
@@ -197,7 +197,7 @@
              style="display: none;">
 
             <div @click.away="showModal = false"
-                 class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#E9ECF4] space-y-6 relative">
+                 class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-300/80 space-y-6 relative">
 
                 <!-- Header Modal -->
                 <div class="flex items-start justify-between gap-4">
@@ -212,7 +212,7 @@
                             <p class="text-xs text-[#64748B] mt-0.5">Rekam penerimaan pembayaran atau pelunasan tagihan nota cucian pelanggan.</p>
                         </div>
                     </div>
-                    <button type="button" @click="showModal = false" class="w-8 h-8 rounded-full bg-[#F1F3FA] hover:bg-[#E2E6F2] text-[#64748B] flex items-center justify-center transition">
+                    <button type="button" @click="showModal = false" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
                         ✕
                     </button>
                 </div>
@@ -239,7 +239,7 @@
                                         x-model="formData.order_id"
                                         @change="onOrderSelected($event.target.value)"
                                         required
-                                        class="w-full px-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-extrabold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
+                                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-extrabold text-[#1E1B4B] focus:outline-none focus:bg-white focus:border-[#1E1B4B]">
                                     <option value="">Pilih Nota Cucian</option>
                                     @foreach($unpaidOrders as $uo)
                                         <option value="{{ $uo->id }}" data-customer="{{ $uo->customer->name ?? '' }}" data-amount="{{ $uo->total_price }}">
@@ -249,21 +249,21 @@
                                 </select>
                             </template>
                             <template x-if="isEdit">
-                                <input type="text" :value="'#RD-' + (8900 + Number(formData.order_id))" readonly class="w-full px-3.5 py-2.5 bg-[#F1F3FA] border border-[#E9ECF4] rounded-2xl text-xs font-extrabold text-[#1E1B4B]">
+                                <input type="text" :value="'#RD-' + (8900 + Number(formData.order_id))" readonly class="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-300/80 rounded-2xl text-xs font-extrabold text-[#1E1B4B]">
                             </template>
                         </div>
 
                         <div class="space-y-1.5">
                             <label class="text-xs font-bold text-[#1E1B4B]">Nama Pelanggan</label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                 </div>
                                 <input type="text"
                                        x-model="formData.customerName"
                                        readonly
                                        placeholder="Nama Pelanggan"
-                                       class="w-full pl-10 pr-8 py-2.5 bg-[#F1F3FA] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B]">
+                                       class="w-full pl-10 pr-8 py-2.5 bg-slate-100 border border-slate-300/80 rounded-2xl text-xs font-bold text-[#1E1B4B]">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-emerald-500">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                 </div>
@@ -278,7 +278,7 @@
                             <input type="text"
                                    x-model="formData.serviceName"
                                    placeholder="Pencucian Reguler / Kiloan"
-                                   class="w-full px-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none">
+                                   class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                         </div>
 
                         <div class="space-y-1.5">
@@ -288,8 +288,8 @@
                                        x-model="formData.weight"
                                        step="0.1"
                                        placeholder="2.0"
-                                       class="w-full px-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-l-2xl text-xs text-[#1E1B4B] focus:outline-none">
-                                <span class="px-3.5 py-2.5 bg-[#EEF0FA] border border-l-0 border-[#E9ECF4] rounded-r-2xl text-xs font-bold text-[#1E1B4B]">kg</span>
+                                       class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-l-2xl text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B]">
+                                <span class="px-3.5 py-2.5 bg-slate-100 border border-l-0 border-slate-300/80 rounded-r-2xl text-xs font-bold text-slate-700">kg</span>
                             </div>
                         </div>
                     </div>
@@ -304,7 +304,7 @@
                                        name="amount"
                                        x-model.number="formData.amount"
                                        required
-                                       class="w-full pl-10 pr-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-sm font-extrabold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
+                                       class="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-sm font-extrabold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                             </div>
                         </div>
 
@@ -313,7 +313,7 @@
                             <div class="flex items-center gap-1.5">
                                 <button type="button"
                                         @click="formData.status = 'completed'"
-                                        :class="formData.status === 'completed' ? 'bg-[#E8FAD6] text-[#22C55E] border-emerald-300' : 'bg-[#F8F9FD] text-[#64748B] border-[#E9ECF4]'"
+                                        :class="formData.status === 'completed' ? 'bg-[#E8FAD6] text-[#22C55E] border-emerald-300' : 'bg-slate-50 text-slate-600 border-slate-200'"
                                         class="flex-1 py-2 px-2 rounded-2xl text-xs font-bold border transition flex items-center justify-center gap-1">
                                     <span class="w-2 h-2 rounded-full bg-[#22C55E]"></span>
                                     <span>Lunas</span>

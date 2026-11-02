@@ -18,11 +18,11 @@
         </div>
 
         <!-- ================= SEARCH & FILTER CONTROLS ================= -->
-        <div class="bg-white rounded-3xl p-4 border border-[#E9ECF4] shadow-sm">
+        <div class="bg-white rounded-3xl p-5 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)]">
             <form method="GET" action="{{ route('admin.services.index') }}" class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
                 <!-- Search text -->
                 <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
@@ -31,21 +31,21 @@
                            name="search"
                            value="{{ request('search') }}"
                            placeholder="Cari nama layanan, deskripsi tarif..."
-                           class="w-full pl-10 pr-4 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-sm text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] focus:ring-1 focus:ring-[#1E1B4B] transition">
+                           class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                 </div>
 
                 <!-- Filter Kategori -->
                 <div class="relative min-w-[180px]">
                     <select name="category"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 pl-4 pr-10 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
+                            class="w-full py-2.5 pl-4 pr-10 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
                         <option value="all" {{ request('category') == 'all' || !request('category') ? 'selected' : '' }}>Semua Layanan</option>
                         <option value="Kiloan" {{ request('category') == 'Kiloan' ? 'selected' : '' }}>Kiloan</option>
                         <option value="Satuan" {{ request('category') == 'Satuan' ? 'selected' : '' }}>Satuan</option>
                         <option value="Sepatu" {{ request('category') == 'Sepatu' ? 'selected' : '' }}>Sepatu</option>
                         <option value="Dry Clean" {{ request('category') == 'Dry Clean' ? 'selected' : '' }}>Dry Clean</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
@@ -56,13 +56,13 @@
                 <div class="relative min-w-[160px]">
                     <select name="sort"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 pl-4 pr-10 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
+                            class="w-full py-2.5 pl-4 pr-10 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
                         <option value="id_asc" {{ request('sort') == 'id_asc' || !request('sort') ? 'selected' : '' }}>ID Terkecil</option>
                         <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Terbaru</option>
                         <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Harga Tertinggi</option>
                         <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Harga Terendah</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
                         </svg>
@@ -72,11 +72,11 @@
         </div>
 
         <!-- ================= DATA TABLE ================= -->
-        <div class="bg-white rounded-3xl border border-[#E9ECF4] shadow-sm overflow-hidden">
+        <div class="bg-white rounded-3xl border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-[#565476] text-white text-[11px] font-extrabold tracking-wider uppercase">
+                        <tr class="bg-[#1E1B4B] text-white text-[11px] font-extrabold tracking-wider uppercase">
                             <th class="py-4 px-6 rounded-tl-2xl w-16">ID</th>
                             <th class="py-4 px-6">Nama Layanan / Item</th>
                             <th class="py-4 px-6">Harga</th>
@@ -84,9 +84,9 @@
                             <th class="py-4 px-6 text-center rounded-tr-2xl w-28">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-[#F0F2F8] text-xs">
+                    <tbody class="divide-y divide-slate-200/80 text-xs">
                         @forelse($services as $item)
-                            <tr class="hover:bg-[#F8F9FD]/80 transition">
+                            <tr class="hover:bg-indigo-50/40 transition">
                                 <td class="py-4 px-6 font-extrabold text-[#1E1B4B] text-sm">
                                     {{ $item->id }}
                                 </td>
@@ -97,7 +97,7 @@
                                     </div>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <span class="inline-block px-3.5 py-1.5 bg-[#F1F3FA] text-[#1E1B4B] font-extrabold rounded-full text-xs">
+                                    <span class="inline-block px-3.5 py-1.5 bg-indigo-50 border border-indigo-100 text-[#1E1B4B] font-extrabold rounded-full text-xs">
                                         Rp {{ number_format($item->price, 0, ',', '.') }}
                                     </span>
                                 </td>
@@ -143,7 +143,7 @@
             </div>
 
             <!-- Footer Pagination -->
-            <div class="p-5 border-t border-[#F0F2F8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
+            <div class="p-5 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
                 <div>
                     Menampilkan <span class="font-bold text-[#1E1B4B]">{{ $services->count() }}</span> dari <span class="font-bold text-[#1E1B4B]">{{ $totalServices }}</span> layanan aktif
                 </div>
@@ -165,7 +165,7 @@
              style="display: none;">
 
             <div @click.away="showModal = false"
-                 class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#E9ECF4] space-y-6 relative">
+                 class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-300/80 space-y-6 relative">
 
                 <!-- Header Modal -->
                 <div class="flex items-start justify-between gap-4">
@@ -183,7 +183,7 @@
                             <p class="text-xs text-[#64748B] mt-0.5">Tambahkan paket cuci atau item baru ke dalam daftar katalog & POS kasir.</p>
                         </div>
                     </div>
-                    <button type="button" @click="showModal = false" class="w-8 h-8 rounded-full bg-[#F1F3FA] hover:bg-[#E2E6F2] text-[#64748B] flex items-center justify-center transition">
+                    <button type="button" @click="showModal = false" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
                         ✕
                     </button>
                 </div>
@@ -191,20 +191,20 @@
                 <!-- Top Row: ID Layanan & Category Pills -->
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-1">
                     <div>
-                        <div class="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">ID LAYANAN</div>
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">ID LAYANAN</div>
                         <div class="flex items-center gap-2 mt-1">
                             <span class="text-sm font-extrabold text-[#1E1B4B]" x-text="'# ID: ' + formId"></span>
-                            <span class="px-2 py-0.5 bg-[#F1F3FA] text-[#64748B] rounded-full text-[10px] font-bold">AUTO</span>
+                            <span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full text-[10px] font-bold">AUTO</span>
                         </div>
                     </div>
 
                     <div>
-                        <div class="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8] mb-1 sm:text-right">KATEGORI LAYANAN</div>
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 sm:text-right">KATEGORI LAYANAN</div>
                         <div class="flex flex-wrap items-center gap-1.5">
                             <template x-for="cat in ['Kiloan', 'Satuan', 'Sepatu / Tas', 'Karpet']" :key="cat">
                                 <button type="button"
                                         @click="selectedCategory = cat"
-                                        :class="selectedCategory === cat ? 'bg-[#1E1B4B] text-white' : 'bg-[#F1F3FA] text-[#64748B] hover:bg-[#E2E6F2]'"
+                                        :class="selectedCategory === cat ? 'bg-[#1E1B4B] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
                                         class="px-2.5 py-1 rounded-full text-xs font-bold transition"
                                         x-text="cat"></button>
                             </template>
@@ -226,7 +226,7 @@
                             <span class="text-[11px] text-rose-500 font-semibold">*Wajib diisi</span>
                         </div>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>
                             </div>
                             <input type="text"
@@ -234,7 +234,7 @@
                                    x-model="formData.name"
                                    required
                                    placeholder="Contoh: Cuci Kiloan Super Wangi"
-                                   class="w-full pl-10 pr-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
+                                   class="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                         </div>
                     </div>
 
@@ -249,7 +249,7 @@
                                        x-model="formData.price"
                                        required
                                        placeholder="18000"
-                                       class="w-full pl-10 pr-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-extrabold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
+                                       class="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-extrabold text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                             </div>
                         </div>
 
@@ -259,7 +259,7 @@
                                 <template x-for="unit in ['per Kg', 'per Pcs', 'per Meter']" :key="unit">
                                     <button type="button"
                                             @click="selectedUnit = unit"
-                                            :class="selectedUnit === unit ? 'bg-[#1E1B4B] text-white' : 'bg-[#F1F3FA] text-[#64748B] hover:bg-[#E2E6F2]'"
+                                            :class="selectedUnit === unit ? 'bg-[#1E1B4B] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
                                             class="flex-1 py-2 rounded-2xl text-xs font-bold transition text-center"
                                             x-text="unit"></button>
                                 </template>
@@ -271,18 +271,18 @@
                     <div class="space-y-1.5">
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-bold text-[#1E1B4B]">Deskripsi Layanan</label>
-                            <span class="text-[11px] text-[#94A3B8]">Maks 150 karakter</span>
+                            <span class="text-[11px] text-slate-400">Maks 150 karakter</span>
                         </div>
                         <textarea name="description"
                                   x-model="formData.description"
                                   rows="3"
                                   maxlength="150"
                                   placeholder="Pencucian premium dengan deterjen anti-bakteri, softener aroma floral segar, dan setrika uap presisi. Selesai 2 hari kerja."
-                                  class="w-full p-3.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]"></textarea>
+                                  class="w-full p-3.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition"></textarea>
                     </div>
 
                     <!-- Active Toggle Box -->
-                    <div class="bg-[#F8F9FD] border border-[#EEF0FA] rounded-2xl p-4 flex items-center justify-between">
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl bg-[#E8FAD6] text-[#22C55E] flex items-center justify-center">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>

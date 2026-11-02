@@ -18,11 +18,11 @@
         </div>
 
         <!-- ================= SEARCH & FILTER CONTROLS ================= -->
-        <div class="bg-white rounded-3xl p-4 border border-[#E9ECF4] shadow-sm">
+        <div class="bg-white rounded-3xl p-5 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)]">
             <form method="GET" action="{{ route('admin.deliveries.index') }}" class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
                 <!-- Search text -->
                 <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
@@ -31,20 +31,20 @@
                            name="search"
                            value="{{ request('search') }}"
                            placeholder="Cari nota, pelanggan, alamat pengantaran..."
-                           class="w-full pl-10 pr-4 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-sm text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition">
+                           class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                 </div>
 
                 <!-- Filter Status Antar -->
                 <div class="relative min-w-[180px]">
                     <select name="status"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 pl-4 pr-10 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
+                            class="w-full py-2.5 pl-4 pr-10 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
                         <option value="all" {{ request('status') == 'all' || !request('status') ? 'selected' : '' }}>Semua Status Antar</option>
                         <option value="scheduled" {{ request('status') == 'scheduled' ? 'selected' : '' }}>Belum di Antar</option>
                         <option value="on-way" {{ request('status') == 'on-way' ? 'selected' : '' }}>Sedang di Antar</option>
                         <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Selesai Terantar</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
@@ -55,11 +55,11 @@
                 <div class="relative min-w-[160px]">
                     <select name="sort"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 pl-4 pr-10 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
+                            class="w-full py-2.5 pl-4 pr-10 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
                         <option value="latest" {{ request('sort') == 'latest' || !request('sort') ? 'selected' : '' }}>Urutan: Terkini</option>
                         <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Urutan: Terlama</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
                         </svg>
@@ -69,11 +69,11 @@
         </div>
 
         <!-- ================= DATA TABLE ================= -->
-        <div class="bg-white rounded-3xl border border-[#E9ECF4] shadow-sm overflow-hidden">
+        <div class="bg-white rounded-3xl border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-[#565476] text-white text-[11px] font-extrabold tracking-wider uppercase">
+                        <tr class="bg-[#1E1B4B] text-white text-[11px] font-extrabold tracking-wider uppercase">
                             <th class="py-4 px-6 rounded-tl-2xl w-24">ID Nota</th>
                             <th class="py-4 px-6">Pelanggan & Kontak</th>
                             <th class="py-4 px-6">Rincian Cucian</th>
@@ -82,7 +82,7 @@
                             <th class="py-4 px-6 text-center rounded-tr-2xl w-32">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-[#F0F2F8] text-xs">
+                    <tbody class="divide-y divide-slate-200/80 text-xs">
                         @forelse($deliveries as $item)
                             @php
                                 $cust = $item->order->customer ?? null;
@@ -92,7 +92,7 @@
                                 $serviceName = $items->first()->service->name ?? 'Bedcover King + 8 kg Kiloan';
                                 $status = $item->status ?? 'scheduled';
                             @endphp
-                            <tr class="hover:bg-[#F8F9FD]/80 transition">
+                            <tr class="hover:bg-indigo-50/40 transition">
                                 <td class="py-4 px-6 font-extrabold text-[#1E1B4B] text-sm">
                                     #RD-{{ 8900 + ($item->order_id ?? $item->id) }}
                                 </td>
@@ -202,7 +202,7 @@
             </div>
 
             <!-- Footer Pagination -->
-            <div class="p-5 border-t border-[#F0F2F8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
+            <div class="p-5 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
                 <div>
                     Menampilkan <span class="font-bold text-[#1E1B4B]">{{ $deliveries->count() }}</span> dari <span class="font-bold text-[#1E1B4B]">{{ $totalDeliveries }}</span> cucian siap antar
                 </div>
@@ -224,7 +224,7 @@
              style="display: none;">
 
             <div @click.away="showModal = false"
-                 class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-[#E9ECF4] space-y-6 relative">
+                 class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-300/80 space-y-6 relative">
 
                 <!-- Header Modal -->
                 <div class="flex items-start justify-between gap-4">
@@ -243,7 +243,7 @@
                             <p class="text-xs text-[#64748B] mt-0.5">Atur jadwal kurir dan rute pengantaran cucian bersih siap antar ke rumah pelanggan di Malang Raya.</p>
                         </div>
                     </div>
-                    <button type="button" @click="showModal = false" class="w-8 h-8 rounded-full bg-[#F1F3FA] hover:bg-[#E2E6F2] text-[#64748B] flex items-center justify-center transition">
+                    <button type="button" @click="showModal = false" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
                         ✕
                     </button>
                 </div>
@@ -264,7 +264,7 @@
                                         x-model="formData.order_id"
                                         @change="onOrderSelected($event.target.value)"
                                         required
-                                        class="w-full px-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-extrabold text-[#1E1B4B] focus:outline-none">
+                                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-extrabold text-[#1E1B4B] focus:outline-none focus:bg-white focus:border-[#1E1B4B]">
                                     <option value="">Pilih Nota Siap Antar</option>
                                     @foreach($readyOrders as $ro)
                                         <option value="{{ $ro->id }}"
@@ -277,7 +277,7 @@
                                 </select>
                             </template>
                             <template x-if="isEdit">
-                                <input type="text" :value="'#RD-' + (8900 + Number(formData.order_id))" readonly class="w-full px-3.5 py-2.5 bg-[#F1F3FA] border border-[#E9ECF4] rounded-2xl text-xs font-extrabold text-[#1E1B4B]">
+                                <input type="text" :value="'#RD-' + (8900 + Number(formData.order_id))" readonly class="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-300/80 rounded-2xl text-xs font-extrabold text-[#1E1B4B]">
                             </template>
                         </div>
 
@@ -286,7 +286,7 @@
                             <input type="text"
                                    x-model="formData.customerInfo"
                                    readonly
-                                   class="w-full px-3.5 py-2.5 bg-[#F1F3FA] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B]">
+                                   class="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-300/80 rounded-2xl text-xs font-bold text-[#1E1B4B]">
                         </div>
                     </div>
 
@@ -294,7 +294,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                         <div class="space-y-1.5">
                             <label class="text-xs font-bold text-[#1E1B4B]">Rincian Cucian (Detail Paket)</label>
-                            <div class="p-3 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] font-medium min-h-[72px]">
+                            <div class="p-3 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-[#1E1B4B] font-medium min-h-[72px]">
                                 Bedcover King + 8 kg Kiloan (2 Item, Bungkus Vacuum Higenis, Wangi Ocean Fresh)
                             </div>
                         </div>
@@ -306,7 +306,7 @@
                                       required
                                       rows="3"
                                       placeholder="Permata Jingga Blok CC-09, Tunggulwulung, Lowokwaru, Kota Malang"
-                                      class="w-full p-3 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none"></textarea>
+                                      class="w-full p-3 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition"></textarea>
                         </div>
                     </div>
 
@@ -315,7 +315,7 @@
                         <div class="space-y-1.5">
                             <label class="text-xs font-bold text-[#1E1B4B]">Pilih Driver / Kurir <span class="text-rose-500">*</span></label>
                             <select name="driver"
-                                    class="w-full px-3 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none">
+                                    class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B]">
                                 <option value="Bagus Ananta">Bagus Ananta (Vario N 4821 AC)</option>
                                 <option value="Rian Santoso">Rian Santoso (Scoopy N 3190 BB)</option>
                                 <option value="Hendra Wijaya">Hendra Wijaya (PCX N 5542 AB)</option>
@@ -325,7 +325,7 @@
                         <div class="space-y-1.5">
                             <label class="text-xs font-bold text-[#1E1B4B]">Jadwal & Slot Waktu</label>
                             <select name="time_slot"
-                                    class="w-full px-3 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none">
+                                    class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B]">
                                 <option value="13:00 - 15:00">Kloter Siang (13:00 - 15:00)</option>
                                 <option value="09:00 - 11:00">Kloter Pagi (09:00 - 11:00)</option>
                                 <option value="16:00 - 18:00">Kloter Sore (16:00 - 18:00)</option>
@@ -336,7 +336,7 @@
                             <label class="text-xs font-bold text-[#1E1B4B]">Status Antar Awal</label>
                             <select name="status"
                                     x-model="formData.status"
-                                    class="w-full px-3 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none">
+                                    class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B]">
                                 <option value="scheduled">Belum di Antar</option>
                                 <option value="on-way">Sedang di Antar</option>
                                 <option value="completed">Selesai</option>
@@ -351,7 +351,7 @@
                                name="notes"
                                x-model="formData.notes"
                                placeholder="Titip di pos security perumahan jika rumah kosong, infokan via WA."
-                               class="w-full px-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none">
+                               class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                     </div>
 
                     <!-- Notice Checkbox -->

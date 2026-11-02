@@ -18,11 +18,11 @@
         </div>
 
         <!-- ================= SEARCH & FILTER CONTROLS ================= -->
-        <div class="bg-white rounded-3xl p-4 border border-[#E9ECF4] shadow-sm">
+        <div class="bg-white rounded-3xl p-5 border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)]">
             <form method="GET" action="{{ route('admin.customers.index') }}" class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
                 <!-- Search text -->
                 <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
@@ -31,20 +31,20 @@
                            name="search"
                            value="{{ request('search') }}"
                            placeholder="Cari nama, email, no. telepon, atau kota..."
-                           class="w-full pl-10 pr-4 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-sm text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] focus:ring-1 focus:ring-[#1E1B4B] transition">
+                           class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                 </div>
 
                 <!-- Filter Kota -->
                 <div class="relative min-w-[200px]">
                     <select name="city"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 pl-4 pr-10 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
+                            class="w-full py-2.5 pl-4 pr-10 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
                         <option value="all" {{ request('city') == 'all' || !request('city') ? 'selected' : '' }}>Semua Kota (Malang Raya)</option>
                         <option value="Kota Malang" {{ request('city') == 'Kota Malang' ? 'selected' : '' }}>Kota Malang</option>
                         <option value="Kota Batu" {{ request('city') == 'Kota Batu' ? 'selected' : '' }}>Kota Batu</option>
                         <option value="Kab. Malang" {{ request('city') == 'Kab. Malang' ? 'selected' : '' }}>Kab. Malang</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
@@ -55,12 +55,12 @@
                 <div class="relative min-w-[160px]">
                     <select name="sort"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 pl-4 pr-10 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs font-bold text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
+                            class="w-full py-2.5 pl-4 pr-10 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] transition appearance-none cursor-pointer">
                         <option value="latest" {{ request('sort') == 'latest' || !request('sort') ? 'selected' : '' }}>Urutan: Terkini</option>
                         <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Urutan: Terlama</option>
                         <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Nama (A-Z)</option>
                     </select>
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
                         </svg>
@@ -70,11 +70,11 @@
         </div>
 
         <!-- ================= DATA TABLE ================= -->
-        <div class="bg-white rounded-3xl border border-[#E9ECF4] shadow-sm overflow-hidden">
+        <div class="bg-white rounded-3xl border border-slate-300/80 shadow-[0_10px_30px_-5px_rgba(26,23,67,0.06),0_4px_12px_rgba(0,0,0,0.03)] overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-[#565476] text-white text-[11px] font-extrabold tracking-wider uppercase">
+                        <tr class="bg-[#1E1B4B] text-white text-[11px] font-extrabold tracking-wider uppercase">
                             <th class="py-4 px-6 rounded-tl-2xl">ID</th>
                             <th class="py-4 px-6">Pelanggan</th>
                             <th class="py-4 px-6">Email</th>
@@ -83,9 +83,9 @@
                             <th class="py-4 px-6 text-center rounded-tr-2xl">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-[#F0F2F8] text-xs">
+                    <tbody class="divide-y divide-slate-200/80 text-xs">
                         @forelse($customers as $item)
-                            <tr class="hover:bg-[#F8F9FD]/80 transition">
+                            <tr class="hover:bg-indigo-50/40 transition">
                                 <td class="py-4 px-6">
                                     <div class="font-extrabold text-[#1E1B4B] text-sm">#RD-{{ 8900 + $item->id }}</div>
                                     <div class="text-[11px] text-[#94A3B8]">{{ $item->created_at ? $item->created_at->format('H:i') . ' WIB' : '10:00 WIB' }}</div>
@@ -101,7 +101,7 @@
                                     {{ $item->phone ?? '-' }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    <span class="inline-block px-3 py-1 bg-[#EEF2FF] text-[#4F46E5] font-bold rounded-full text-xs">
+                                    <span class="inline-block px-3 py-1 bg-indigo-50 border border-indigo-100 text-[#4F46E5] font-bold rounded-full text-xs">
                                         {{ $item->city ?? 'Kota Malang' }}
                                     </span>
                                 </td>
@@ -144,7 +144,7 @@
             </div>
 
             <!-- Footer Pagination -->
-            <div class="p-5 border-t border-[#F0F2F8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
+            <div class="p-5 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
                 <div>
                     Menampilkan <span class="font-bold text-[#1E1B4B]">{{ $customers->count() }}</span> dari <span class="font-bold text-[#1E1B4B]">{{ $totalCustomers }}</span> pelanggan aktif
                 </div>
@@ -166,7 +166,7 @@
              style="display: none;">
 
             <div @click.away="showModal = false"
-                 class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#E9ECF4] space-y-6 relative">
+                 class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-300/80 space-y-6 relative">
 
                 <!-- Header Modal -->
                 <div class="flex items-start justify-between gap-4">
@@ -181,13 +181,13 @@
                             <p class="text-xs text-[#64748B] mt-0.5">Masukkan data identitas pelanggan baru untuk reservasi dan riwayat laundry.</p>
                         </div>
                     </div>
-                    <button type="button" @click="showModal = false" class="w-8 h-8 rounded-full bg-[#F1F3FA] hover:bg-[#E2E6F2] text-[#64748B] flex items-center justify-center transition">
+                    <button type="button" @click="showModal = false" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
                         ✕
                     </button>
                 </div>
 
                 <!-- Auto ID Card -->
-                <div class="bg-[#F8F9FD] border border-[#EEF0FA] rounded-2xl p-4 flex items-center justify-between">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex items-center justify-between">
                     <div class="flex items-center gap-3">
                         <div class="w-9 h-9 rounded-xl bg-[#1E1B4B] text-white flex items-center justify-center">
                             <svg class="w-4 h-4 text-[#BFF108]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,11 +195,11 @@
                             </svg>
                         </div>
                         <div>
-                            <div class="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">ID PELANGGAN (SISTEM AUTO)</div>
+                            <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">ID PELANGGAN (SISTEM AUTO)</div>
                             <div class="text-base font-extrabold text-[#1E1B4B]" x-text="formCode"></div>
                         </div>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-[#E9ECF4] text-[#1E1B4B] text-xs font-semibold rounded-full shadow-sm">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-slate-200 text-[#1E1B4B] text-xs font-semibold rounded-full shadow-xs">
                         <span class="w-2 h-2 rounded-full bg-[#BFF108]"></span>
                         <span>Dibuat otomatis oleh sistem</span>
                     </span>
@@ -217,7 +217,7 @@
                         <div class="space-y-1.5">
                             <label class="text-xs font-bold text-[#1E1B4B]">Nama Lengkap <span class="text-rose-500">*</span></label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                 </div>
                                 <input type="text"
@@ -228,21 +228,21 @@
                                        title="Nama hanya boleh berisi huruf dan spasi"
                                        required
                                        placeholder="Contoh: Bambang Setyawan"
-                                       class="w-full pl-10 pr-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
+                                       class="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                             </div>
                         </div>
 
                         <div class="space-y-1.5">
-                            <label class="text-xs font-bold text-[#1E1B4B]">Email Pelanggan <span class="text-[#94A3B8] font-normal">(Opsional)</span></label>
+                            <label class="text-xs font-bold text-[#1E1B4B]">Email Pelanggan <span class="text-slate-400 font-normal">(Opsional)</span></label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                                 </div>
                                 <input type="email"
                                        name="email"
                                        x-model="formData.email"
                                        placeholder="nama@gmail.com"
-                                       class="w-full pl-10 pr-3.5 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
+                                       class="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                             </div>
                         </div>
                     </div>
@@ -252,7 +252,7 @@
                         <div class="space-y-1.5">
                             <label class="text-xs font-bold text-[#1E1B4B]">Nomor Telepon / WhatsApp <span class="text-rose-500">*</span></label>
                             <div class="flex items-center">
-                                <span class="px-3 py-2.5 bg-[#EEF0FA] border border-r-0 border-[#E9ECF4] rounded-l-2xl text-xs font-bold text-[#1E1B4B]">+62</span>
+                                <span class="px-3 py-2.5 bg-slate-100 border border-r-0 border-slate-300/80 rounded-l-2xl text-xs font-bold text-slate-700">+62</span>
                                 <input type="text"
                                        name="phone"
                                        x-model="formData.phone"
@@ -261,20 +261,20 @@
                                        title="Nomor telepon hanya boleh berisi angka"
                                        required
                                        placeholder="87811239081"
-                                       class="w-full px-3 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-r-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]">
+                                       class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300/80 rounded-r-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition">
                             </div>
                         </div>
 
                         <div class="space-y-1.5">
                             <label class="text-xs font-bold text-[#1E1B4B]">Kota / Wilayah Layanan <span class="text-rose-500">*</span></label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                 </div>
                                 <select name="city"
                                         x-model="formData.city"
                                         required
-                                        class="w-full pl-10 pr-8 py-2.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B] appearance-none cursor-pointer">
+                                        class="w-full pl-10 pr-8 py-2.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#1E1B4B] appearance-none cursor-pointer">
                                     <option value="Kota Malang">Kota Malang</option>
                                     <option value="Kota Batu">Kota Batu</option>
                                     <option value="Kab. Malang">Kab. Malang</option>
@@ -287,18 +287,18 @@
                     <div class="space-y-1.5">
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-bold text-[#1E1B4B]">Alamat Lengkap / Catatan Pengantaran <span class="text-rose-500">*</span></label>
-                            <span class="text-[11px] text-[#94A3B8]">Untuk pickup & delivery</span>
+                            <span class="text-[11px] text-slate-400">Untuk pickup & delivery</span>
                         </div>
                         <textarea name="address"
                                   x-model="formData.address"
                                   rows="3"
                                   required
                                   placeholder="Nama jalan, nomor rumah, RT/RW, nama kos/perumahan, atau patokan driver..."
-                                  class="w-full p-3.5 bg-[#F8F9FD] border border-[#E9ECF4] rounded-2xl text-xs text-[#1E1B4B] focus:outline-none focus:border-[#1E1B4B]"></textarea>
+                                  class="w-full p-3.5 bg-slate-50 border border-slate-300/80 rounded-2xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#1E1B4B] focus:ring-2 focus:ring-[#1E1B4B]/10 transition"></textarea>
                     </div>
 
                     <!-- Notice Pill -->
-                    <div class="p-3 bg-[#EEF2FF] rounded-2xl flex items-start gap-2.5 text-xs text-[#4F46E5]">
+                    <div class="p-3 bg-indigo-50/80 border border-indigo-200/80 rounded-2xl flex items-start gap-2.5 text-xs text-[#4F46E5]">
                         <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
@@ -306,7 +306,7 @@
                     </div>
 
                     <!-- Footer Buttons -->
-                    <div class="pt-3 border-t border-[#F0F2F8] flex items-center justify-between">
+                    <div class="pt-3 border-t border-slate-200/80 flex items-center justify-between">
                         <div class="flex items-center gap-1.5 text-[11px] text-[#94A3B8]">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                             <span>Data terenkripsi aman</span>
