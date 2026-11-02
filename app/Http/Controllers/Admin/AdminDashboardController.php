@@ -20,14 +20,22 @@ class AdminDashboardController extends Controller
         $selectedDate = $request->query('date', Carbon::today()->toDateString());
         $isDateFiltered = $request->filled('date');
 
-        // Total pendapatan pada tanggal terpilih
-        $todayRevenue = Payment::where('status', 'completed')
-            ->whereDate('created_at', $selectedDate)
+        // Total pesanan hari ini / pada tanggal terpilih
+        $todayOrdersCount = Order::whereDate('created_at', $selectedDate)->count();
+
+        // Total pendapatan pada tanggal terpilih (Real-time, tanpa fallback data lama/dummy)
+        $todayPaymentRevenue = Payment::where('status', 'completed')
+            ->where(function ($q) use ($selectedDate) {
+                $q->whereDate('created_at', $selectedDate)
+                  ->orWhereDate('updated_at', $selectedDate);
+            })
             ->sum('amount');
 
-        if (!$isDateFiltered && $todayRevenue == 0) {
-            $todayRevenue = Payment::where('status', 'completed')->sum('amount');
-        }
+        $todayOrderRevenue = Order::whereDate('created_at', $selectedDate)
+            ->where('status', '!=', 'cancelled')
+            ->sum('total_price');
+
+        $todayRevenue = (float) max($todayPaymentRevenue, $todayOrderRevenue);
 
         // Metrik baru: Order Dalam Proses & Order Selesai
         $inProcessOrders = Order::whereIn('status', ['pending', 'processing'])->count();
@@ -65,6 +73,7 @@ class AdminDashboardController extends Controller
 
         return view('admin.dashboard', compact(
             'totalOrders',
+            'todayOrdersCount',
             'todayRevenue',
             'selectedDate',
             'isDateFiltered',

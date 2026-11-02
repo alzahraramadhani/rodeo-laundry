@@ -50,6 +50,72 @@ class AdminPortalTest extends TestCase
         $response->assertSee('Pesanan Terbaru');
     }
 
+    public function test_dashboard_displays_zero_when_no_revenue_today_without_falling_back_to_old_data(): void
+    {
+        $customer = Customer::create([
+            'name' => 'Budi Santoso',
+            'phone' => '08123456789',
+            'city' => 'Kota Batu',
+        ]);
+
+        $order = Order::create([
+            'customer_id' => $customer->id,
+            'total_price' => 1500000,
+            'status' => 'completed',
+        ]);
+
+        $payment = Payment::create([
+            'order_id' => $order->id,
+            'amount' => 1500000,
+            'method' => 'cash',
+            'status' => 'completed',
+        ]);
+
+        \Illuminate\Support\Facades\DB::table('orders')->where('id', $order->id)->update([
+            'created_at' => now()->subDays(10),
+            'updated_at' => now()->subDays(10),
+        ]);
+        \Illuminate\Support\Facades\DB::table('payments')->where('id', $payment->id)->update([
+            'created_at' => now()->subDays(10),
+            'updated_at' => now()->subDays(10),
+        ]);
+
+        // Access dashboard today without date filter
+        $response = $this->actingAs($this->admin)->get('/admin/dashboard');
+        $response->assertStatus(200);
+        $response->assertViewHas('todayRevenue', 0.0);
+    }
+
+    public function test_dashboard_displays_realtime_revenue_when_paid_today(): void
+    {
+        $customer = Customer::create([
+            'name' => 'Citra Dewi',
+            'phone' => '08129876543',
+            'city' => 'Kota Batu',
+        ]);
+
+        $order = Order::create([
+            'customer_id' => $customer->id,
+            'total_price' => 85000,
+            'status' => 'processing',
+            'created_at' => now(),
+        ]);
+
+        Payment::create([
+            'order_id' => $order->id,
+            'amount' => 85000,
+            'method' => 'cash',
+            'status' => 'completed',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $response = $this->actingAs($this->admin)->get('/admin/dashboard');
+        $response->assertStatus(200);
+        $response->assertViewHas('todayRevenue', 85000.0);
+        $response->assertSee('85.000');
+    }
+
     public function test_admin_can_access_pos(): void
     {
         $response = $this->actingAs($this->admin)->get('/admin/pos');

@@ -45,7 +45,7 @@
                 </div>
                 <div>
                     <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] group-hover:bg-[#BFF108] group-hover:text-[#1E1B4B] text-xs font-bold transition-colors duration-300 shadow-xs">
-                        +14.2%
+                        {{ ($todayOrdersCount ?? 0) > 0 ? "+{$todayOrdersCount} Hari Ini" : 'Semua Status' }}
                     </span>
                 </div>
             </div>
@@ -67,12 +67,22 @@
             <div class="relative z-10">
                 <div class="text-3xl lg:text-4xl font-extrabold text-[#1E1B4B] group-hover:text-white tracking-tight mb-3 flex items-baseline gap-1 transition-colors duration-300">
                     <span class="text-indigo-600 group-hover:text-[#BFF108] text-xl font-bold transition-colors duration-300">Rp</span>
-                    <span>{{ number_format($todayRevenue >= 1000000 ? $todayRevenue / 1000000 : $todayRevenue / 1000, 2, ',', '.') }}</span>
-                    <span class="text-indigo-600 group-hover:text-[#BFF108] text-xl font-bold transition-colors duration-300">{{ $todayRevenue >= 1000000 ? 'jt' : 'rb' }}</span>
+                    @if($todayRevenue >= 1000000)
+                        <span>{{ number_format($todayRevenue / 1000000, 2, ',', '.') }}</span>
+                        <span class="text-indigo-600 group-hover:text-[#BFF108] text-xl font-bold transition-colors duration-300">jt</span>
+                    @elseif($todayRevenue > 0)
+                        <span>{{ number_format($todayRevenue, 0, ',', '.') }}</span>
+                    @else
+                        <span>0</span>
+                    @endif
                 </div>
                 <div>
                     <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-[#1E1B4B] group-hover:bg-[#BFF108] group-hover:text-[#1E1B4B] text-xs font-bold transition-colors duration-300 shadow-xs">
-                        ↑ +8.5%
+                        @if($todayRevenue > 0)
+                            Rp {{ number_format($todayRevenue, 0, ',', '.') }}
+                        @else
+                            {{ isset($isDateFiltered) && $isDateFiltered ? 'Tidak ada pendapatan' : 'Belum ada pendapatan hari ini' }}
+                        @endif
                     </span>
                 </div>
             </div>
