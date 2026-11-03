@@ -674,8 +674,6 @@
                         <li><a href="{{ url('/') }}" class="hover:text-[#BFF108] transition">Beranda</a></li>
                         <li><a href="{{ route('pemesanan') }}" class="hover:text-[#BFF108] transition">Layanan</a></li>
                         <li><a href="{{ route('pesanan.index') }}" class="hover:text-[#BFF108] transition">Pesanan Saya</a></li>
-                        <li><a href="#" class="hover:text-[#BFF108] transition">Pertanyaan Umum (FAQ)</a></li>
-                        <li><a href="#" class="hover:text-[#BFF108] transition">Syarat & Ketentuan</a></li>
                     </ul>
                 </div>
 
